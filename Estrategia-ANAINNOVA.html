@@ -1,0 +1,565 @@
+<title>Sistema de Ventas ANAINNOVA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{
+  --ground:#F7F5F8; --surface:#FFFFFF; --ink:#151317; --muted:#5E5866; --rule:#E4DEE7;
+  --pink:#B8309F; --pink-hl:#F58BEF; --pink-soft:#FBE4F8; --green:#23874A; --green-soft:#DDF0E3; --code:#EFEBF1;
+  --vid:#1F6FB2; --vid-soft:#DDEBF7;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F0E11; --surface:#18161B; --ink:#F1EDF2; --muted:#ABA3B2; --rule:#2B2730;
+    --pink:#F58BEF; --pink-hl:#F58BEF; --pink-soft:#33182F; --green:#6FD196; --green-soft:#15291D; --code:#211E25;
+    --vid:#7DB9F0; --vid-soft:#16263A;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F0E11; --surface:#18161B; --ink:#F1EDF2; --muted:#ABA3B2; --rule:#2B2730;
+  --pink:#F58BEF; --pink-hl:#F58BEF; --pink-soft:#33182F; --green:#6FD196; --green-soft:#15291D; --code:#211E25;
+  --vid:#7DB9F0; --vid-soft:#16263A;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:16.5px/1.65 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;padding-inline:20px;padding-block:0 90px}
+.wrap{max-width:840px;margin:0 auto}
+h1,h2{font-family:Unbounded,"Arial Black",system-ui,sans-serif;text-wrap:balance;margin:0;line-height:1.08}
+h1{font-size:clamp(2rem,6.4vw,3.5rem);font-weight:800;letter-spacing:-.02em}
+h1 mark{background:var(--pink-hl);color:#151317;padding:0 .18em;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+h2{font-size:clamp(1.35rem,3.6vw,1.8rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.06rem;font-weight:700;margin:0;text-wrap:balance}
+p{margin:0;max-width:68ch}
+.eyebrow{font:500 .76rem/1 "JetBrains Mono",ui-monospace,monospace;color:var(--pink);letter-spacing:.04em}
+header{padding-block:60px 40px;display:grid;gap:20px;border-bottom:1px solid var(--rule)}
+.lede{font-size:1.15rem;color:var(--muted)}
+section{padding-block:50px;border-bottom:1px solid var(--rule);display:grid;gap:22px}
+.now{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.now div{background:var(--surface);padding:16px 18px;display:grid;gap:4px}
+.now b{font:800 1.5rem/1.1 Unbounded,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.now span{font-size:.84rem;color:var(--muted)}
+.thesis{background:#151317;color:#F1EDF2;padding:30px;border-radius:14px;display:grid;gap:14px}
+.thesis p{max-width:none;font-size:1.08rem}
+.thesis .big{font:800 clamp(1.15rem,3vw,1.5rem)/1.3 Unbounded,system-ui,sans-serif}
+.thesis .hl{color:#F58BEF}
+.thesis .hv{color:#7DB9F0}
+.thesis .code{font:500 .78rem "JetBrains Mono",monospace;color:#F58BEF}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.box{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:20px;display:grid;gap:10px;align-content:start}
+.box .label{font:500 .72rem/1 "JetBrains Mono",monospace;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+ul.clean{margin:0;padding-left:1.1em;display:grid;gap:7px}
+ul.clean li::marker{color:var(--pink)}
+.phone{background:var(--code);border-radius:10px;padding:16px 18px;white-space:pre-wrap;font:500 .92rem/1.6 Figtree,system-ui,sans-serif;border:1px solid var(--rule)}
+.funnel{list-style:none;margin:0;padding:0;display:grid;counter-reset:f}
+.funnel li{counter-increment:f;display:grid;grid-template-columns:46px 1fr;gap:16px;padding-block:18px;border-top:1px solid var(--rule)}
+.funnel li:first-child{border-top:0}
+.funnel li::before{content:counter(f);font:800 1.05rem/1 Unbounded,system-ui,sans-serif;background:var(--pink-hl);color:#151317;width:40px;height:40px;border-radius:12px;display:grid;place-items:center}
+.funnel div{display:grid;gap:5px}
+.funnel .from{font:500 .72rem/1.3 "JetBrains Mono",monospace;color:var(--muted)}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:600px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:500 .72rem/1.2 "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--code)}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.kw{font:500 .8rem "JetBrains Mono",monospace;background:var(--pink-soft);color:var(--pink);padding:2px 8px;border-radius:5px;white-space:nowrap}
+.t{font:500 .68rem/1 "JetBrains Mono",monospace;padding:4px 7px;border-radius:5px;white-space:nowrap;letter-spacing:.04em}
+.t-web{background:var(--pink-soft);color:var(--pink)}
+.t-vid{background:var(--vid-soft);color:var(--vid)}
+.t-mix{background:var(--green-soft);color:var(--green)}
+.scripts{display:grid;gap:16px}
+.script{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--surface)}
+.script header{padding:14px 18px;background:var(--code);border-bottom:1px solid var(--rule);display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.script header h3{flex:1 1 260px}
+.script .n{font:800 .95rem/1 Unbounded,system-ui,sans-serif;color:var(--muted);font-variant-numeric:tabular-nums}
+.script dl{margin:0;display:grid;grid-template-columns:110px 1fr}
+.script dt,.script dd{margin:0;padding:10px 18px;border-bottom:1px solid var(--rule)}
+.script dt{font:500 .74rem/1.6 "JetBrains Mono",monospace;color:var(--pink)}
+.script dl > :nth-last-child(-n+2){border-bottom:0}
+.week{font:800 1rem/1 Unbounded,system-ui,sans-serif;margin-top:14px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.week span{font:400 .9rem Figtree,system-ui,sans-serif;color:var(--muted)}
+.phase{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.phase .box h3{font-family:Unbounded,system-ui,sans-serif;font-size:1rem;font-weight:800}
+.dont{border-left:4px solid var(--green);background:var(--green-soft);padding:18px 20px;border-radius:0 10px 10px 0;display:grid;gap:8px}
+.note{font-size:.86rem;color:var(--muted)}
+a{color:var(--pink);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+@media (max-width:520px){.script dl{grid-template-columns:1fr}.script dt{border-bottom:0;padding-bottom:0}}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">// estrategia de marketing · versión 2 · perfil 100% video</span>
+  <h1>El sistema de ventas de <mark>ANAINNOVA</mark></h1>
+  <p class="lede">Un perfil de Instagram hecho solo de Reels para vender dos servicios: <strong>diseño de páginas web</strong> y <strong>edición de video</strong>. Todos los Reels usan el mismo esquema: gancho → problema → solución → palabra clave. Incluye 16 guiones, calendario, palabras clave, producción y metas.</p>
+</header>
+
+<section>
+  <span class="eyebrow">// punto de partida</span>
+  <h2>Dónde estás hoy</h2>
+  <div class="now">
+    <div><b>45</b><span>seguidores en @anainnova_</span></div>
+    <div><b>2</b><span>publicaciones</span></div>
+    <div><b>$7/día</b><span>en anuncios de Meta</span></div>
+    <div><b>$1,02</b><span>por conversación</span></div>
+    <div><b>2</b><span>servicios: web + video</span></div>
+  </div>
+  <p>Un perfil solo de video tiene una ventaja enorme para ti: <strong>cada Reel es también tu portafolio de edición</strong>. Si tus videos se ven bien editados, ya estás demostrando lo que vendes antes de decir una palabra.</p>
+</section>
+
+<section>
+  <div class="thesis">
+    <span class="code">// la estrategia en una frase</span>
+    <p class="big">Tus <span class="hv">videos</span> hacen que te encuentren. Tu <span class="hl">web</span> hace que te escriban. Yo hago las dos.</p>
+    <p>Los dos servicios se venden con una sola promesa: <strong>más clientes escribiéndote por WhatsApp</strong>. La edición de video atrae y la página web convierte. Por eso el paquete que más te conviene empujar es el <strong>combo web + videos</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">// 01 posicionamiento</span>
+  <h2>A quién le hablas y qué ofreces</h2>
+  <div class="grid2">
+    <div class="box">
+      <span class="t t-web">PÁGINAS WEB</span>
+      <h3>"Tu web lista en 7 días, conectada a WhatsApp"</h3>
+      <p><b>Para:</b> abogados, clínicas y consultorios, contadores, inmobiliarias, academias.</p>
+      <p><b>Prueba:</b> ingeniera en sistemas · sistema de postgrado de la UNEFA · BidWorks · web de Esteban Tenreiro.</p>
+      <p><b>Precios:</b> Esencial $150 · <b>Profesional $380</b> · Premium $750 (tu tarifario).</p>
+    </div>
+    <div class="box">
+      <span class="t t-vid">EDICIÓN DE VIDEO</span>
+      <h3>"Reels para tu negocio que la gente ve hasta el final"</h3>
+      <p><b>Para:</b> negocios y profesionales que ya graban con el celular pero no tienen tiempo ni sabe editar: restaurantes, tiendas, estética, coaches, médicos.</p>
+      <p><b>Prueba:</b> tu propio perfil, más los videos de NextCore y Xilapost.</p>
+      <p><b>Precios:</b> todavía no están en tu tarifario. Mira la propuesta abajo.</p>
+    </div>
+  </div>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Paquete de video (propuesta)</th><th>Incluye</th><th>Precio sugerido</th></tr></thead>
+    <tbody>
+      <tr><td><b>Reel suelto</b></td><td>1 video de 15–60 s, subtítulos, música, portada, 2 cambios</td><td class="num">$30 – $50</td></tr>
+      <tr><td><b>Pack mensual 8 Reels</b> ⭐</td><td>8 videos al mes, estilo de marca constante, portadas y guía de grabación</td><td class="num">$200 – $300 /mes</td></tr>
+      <tr><td><b>Pack mensual 12 Reels</b></td><td>12 videos, ganchos escritos por ti y calendario de publicación</td><td class="num">$280 – $400 /mes</td></tr>
+      <tr><td><b>Video publicitario</b></td><td>Video para anuncios de 30–60 s con guion, gráficos y 2 versiones</td><td class="num">$80 – $150</td></tr>
+      <tr><td><b>COMBO web + videos</b> 💗</td><td>Web Profesional + 8 Reels del primer mes con la misma imagen</td><td class="num">$520 – $600</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Son precios de referencia pensados para mercado latino, en línea con tu tarifario de webs. Ajústalos a tus horas reales (tu regla: mínimo $12–15/hora). El pack mensual te da algo que la web no: <strong>ingreso fijo cada mes</strong>.</p>
+</section>
+
+<section>
+  <span class="eyebrow">// 02 el embudo</span>
+  <h2>El camino hasta la venta</h2>
+  <ol class="funnel">
+    <li><div><span class="from">atraer · 4 Reels por semana + anuncio $7/día</span><h3>Reels de web y de video, alternados</h3><p>La mitad sobre páginas web y la otra mitad sobre edición. Una vez por semana, un Reel del combo o sobre ti.</p></div></li>
+    <li><div><span class="from">captar · "Comenta WEB / VIDEO y te lo mando"</span><h3>Cada Reel termina con una palabra clave</h3><p>La palabra dice qué servicio le interesa. Así llega al chat ya clasificado. Automatízalo con ManyChat.</p></div></li>
+    <li><div><span class="from">regalar · mensaje privado automático</span><h3>Regalo útil + 2 preguntas</h3><p>Guía, lista de ganchos o revisión gratis de su web o de sus Reels. Luego pregunta qué negocio tiene y si ya tiene web o graba videos.</p></div></li>
+    <li><div><span class="from">convencer · anainnova.com/diagnostico</span><h3>Página corta con tu video y un botón</h3><p>Video tuyo de 90 s, 3 ejemplos de web, 3 antes/después de edición y el botón "Agendar diagnóstico gratis". Pregunta: ¿web, videos o las dos?</p></div></li>
+    <li><div><span class="from">cerrar · llamada de 15 min</span><h3>Diagnóstico → paquete → 50% de adelanto</h3><p>Web: 3 paquetes. Video: pack mensual. Si necesita las dos cosas, ofreces el combo.</p></div></li>
+    <li><div><span class="from">multiplicar · al entregar</span><h3>Venta cruzada + testimonio en video</h3><p>A quien compra web le ofreces el pack de Reels. A quien compra Reels le ofreces la web. Pides el testimonio grabado y lo conviertes en Reel.</p></div></li>
+  </ol>
+</section>
+
+<section>
+  <span class="eyebrow">// 03 perfil</span>
+  <h2>Tu perfil como vitrina de video</h2>
+  <div class="grid2">
+    <div class="box">
+      <span class="label">Bio propuesta</span>
+      <div class="phone">Ana Gabriela · Ingeniera y editora 💻🎬
+Páginas web + Reels que te traen clientes
+Web lista en 7 días · Videos que se ven completos
+👇 Comenta WEB o VIDEO en cualquier Reel
+anainnova.com/diagnostico</div>
+    </div>
+    <div class="box">
+      <span class="label">Historias destacadas</span>
+      <ul class="clean">
+        <li><b>Empieza aquí:</b> tú en cámara, 30 segundos.</li>
+        <li><b>Webs:</b> recorridos en pantalla de tus proyectos.</li>
+        <li><b>Antes/Después:</b> video crudo vs editado.</li>
+        <li><b>Clientes:</b> testimonios y mensajes (con permiso).</li>
+        <li><b>Combo:</b> web + videos, cómo funciona.</li>
+        <li><b>Cómo trabajo:</b> pasos, plazos y 50%.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="box">
+      <span class="label">Cuadrícula ordenada</span>
+      <p>Cada portada lleva una etiqueta de color para que el perfil se entienda de un vistazo:</p>
+      <p><span class="t t-web">WEB</span> rosa · <span class="t t-vid">VIDEO</span> azul · <span class="t t-mix">COMBO</span> verde</p>
+      <p class="note">Portada vertical de 1080×1920 con el texto dentro de la zona central de 1080×1440, que es la parte que se ve en la cuadrícula del perfil. Usa texto grande, tu cara y el mismo estilo rosa sobre negro de tu primer diseño.</p>
+    </div>
+    <div class="box">
+      <span class="label">3 Reels fijados</span>
+      <ul class="clean">
+        <li><b>#04</b> Soy ingeniera y editora: esto hago por tu negocio → <span class="kw">COMBO</span></li>
+        <li><b>#02</b> Mismo video: sin editar vs editado → <span class="kw">VIDEO</span></li>
+        <li><b>#03</b> Reviso la web de un negocio en 60 segundos → <span class="kw">REVISA</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">// 04 palabras clave</span>
+  <h2>Qué comentan y qué reciben</h2>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Palabra</th><th>Servicio</th><th>Regalo que envías</th><th>Lleva a vender</th></tr></thead>
+    <tbody>
+      <tr><td><span class="kw">WEB</span></td><td><span class="t t-web">WEB</span></td><td>Guía "¿Qué web necesita tu negocio?"</td><td>Paquete Profesional</td></tr>
+      <tr><td><span class="kw">REVISA</span></td><td><span class="t t-web">WEB</span></td><td>Video de 2 min revisando su web con 3 mejoras</td><td>Rediseño o web nueva</td></tr>
+      <tr><td><span class="kw">PRECIO</span></td><td><span class="t t-web">WEB</span></td><td>"Cuánto cuesta una web de verdad" con rangos</td><td>Filtra y ancla el precio</td></tr>
+      <tr><td><span class="kw">VIDEO</span></td><td><span class="t t-vid">VIDEO</span></td><td>Guía "Cómo grabar videos de tu negocio con el celular"</td><td>Pack mensual de Reels</td></tr>
+      <tr><td><span class="kw">GANCHO</span></td><td><span class="t t-vid">VIDEO</span></td><td>"20 ganchos para Reels de negocios" en PDF</td><td>Pack de 12 Reels con ganchos</td></tr>
+      <tr><td><span class="kw">REEL</span></td><td><span class="t t-vid">VIDEO</span></td><td>Revisión gratis de sus últimos 3 Reels en nota de voz</td><td>Pack mensual</td></tr>
+      <tr><td><span class="kw">COMBO</span></td><td><span class="t t-mix">COMBO</span></td><td>Explicación del combo web + videos, con ejemplo</td><td>Combo $520–$600</td></tr>
+      <tr><td><span class="kw">RETO</span></td><td><span class="t t-mix">COMBO</span></td><td>Aviso de episodios nuevos + postularse como próximo negocio</td><td>Combo y caso de estudio</td></tr>
+      <tr><td><span class="kw">CUPO</span></td><td><span class="t t-mix">COMBO</span></td><td>Enlace directo para agendar diagnóstico</td><td>Cualquier paquete</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="grid2">
+    <div class="box">
+      <span class="label">Mensaje automático · palabras de web</span>
+      <div class="phone">¡Hola! 👋 Soy Ana, de Anainnova.
+Aquí tienes lo que pediste 👉 [enlace]
+
+Cuéntame rápido:
+1️⃣ ¿Qué tipo de negocio tienes?
+2️⃣ ¿Ya tienes página web o empezamos de cero?</div>
+    </div>
+    <div class="box">
+      <span class="label">Mensaje automático · palabras de video</span>
+      <div class="phone">¡Hola! 👋 Soy Ana, de Anainnova.
+Aquí tienes lo que pediste 👉 [enlace]
+
+Cuéntame rápido:
+1️⃣ ¿Qué tipo de negocio tienes?
+2️⃣ ¿Ya grabas videos o empezamos desde cero?</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">// 05 formatos de video</span>
+  <h2>Seis formatos que puedes repetir</h2>
+  <p>No hace falta inventar cada semana: rota estos formatos. Todos siguen el esquema <strong>gancho → problema → solución → palabra clave</strong>.</p>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Formato</th><th>Cómo se graba</th><th>Mejor para</th></tr></thead>
+    <tbody>
+      <tr><td><b>A cámara</b></td><td>Tú hablando de frente, cortes cada 2–3 s, subtítulos grandes</td><td>Opinión, precios, sobre ti</td></tr>
+      <tr><td><b>Pantalla + cara</b></td><td>Grabación de pantalla con tu cara en una esquina</td><td>Revisar webs, mostrar proyectos</td></tr>
+      <tr><td><b>Antes / después</b></td><td>Pantalla dividida o transición: crudo vs editado, web vieja vs nueva</td><td>Demostrar la edición y el rediseño</td></tr>
+      <tr><td><b>Detrás de cámaras</b></td><td>Timelapse editando o programando, con voz en off</td><td>Confianza y proceso</td></tr>
+      <tr><td><b>Serie por episodios</b></td><td>Mismo cliente en varios Reels con "Ep. 1, 2, 3…"</td><td>Que vuelvan a tu perfil</td></tr>
+      <tr><td><b>Testimonio</b></td><td>El cliente habla 20–30 s + imágenes de su web o videos</td><td>Prueba social y cierre</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">// 06 banco de guiones</span>
+  <h2>16 Reels listos para grabar</h2>
+  <p>Numerados en el orden del calendario. Duración ideal: 25–45 segundos.</p>
+
+  <div class="week">Semana 1 <span>Presentarte y demostrar</span></div>
+  <div class="scripts">
+    <article class="script"><header><span class="n">01</span><h3>Tu negocio solo existe en Instagram</h3><span class="t t-web">WEB</span><span class="t" style="background:var(--code);color:var(--muted)">A CÁMARA</span></header><dl>
+      <dt>Gancho</dt><dd>"Si tu negocio solo existe en Instagram, estás a un reporte de desaparecer."</dd>
+      <dt>Problema</dt><dd>"Te hackean o te cierran la cuenta y pierdes todos tus clientes de un día para otro. Y quien te busca en Google no te encuentra."</dd>
+      <dt>Solución</dt><dd>"Una web propia es tu local digital: nadie te la quita, aparece en Google y manda los clientes directo a tu WhatsApp."</dd>
+      <dt>CTA</dt><dd>"Comenta <b>WEB</b> y te mando la guía para saber qué web necesita tu negocio."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">02</span><h3>Es el mismo video. La diferencia es la edición</h3><span class="t t-vid">VIDEO</span><span class="t" style="background:var(--code);color:var(--muted)">ANTES / DESPUÉS</span></header><dl>
+      <dt>Gancho</dt><dd>(Pantalla dividida: crudo a la izquierda, editado a la derecha) "Estos dos videos son exactamente el mismo."</dd>
+      <dt>Problema</dt><dd>"El de la izquierda lo sube la mayoría de negocios: sin cortes, sin subtítulos, con silencios. La gente lo pasa en 2 segundos."</dd>
+      <dt>Solución</dt><dd>"El de la derecha tiene gancho, cortes rápidos, subtítulos y música. Misma grabación, pero ahora sí lo ven hasta el final."</dd>
+      <dt>CTA</dt><dd>"Si grabas con el celular y quieres que se vea así, comenta <b>VIDEO</b> y te mando mi guía para grabar mejor."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">03</span><h3>Reviso la web de un negocio en 60 segundos</h3><span class="t t-web">WEB</span><span class="t" style="background:var(--code);color:var(--muted)">PANTALLA + CARA</span></header><dl>
+      <dt>Gancho</dt><dd>"Esta web está perdiendo clientes y te voy a decir exactamente por qué."</dd>
+      <dt>Problema</dt><dd>Muestra 3 errores: tarda en abrir en el celular, no tiene botón de WhatsApp y el teléfono está escondido.</dd>
+      <dt>Solución</dt><dd>Muestra la versión corregida en Figma, con una transición de antes/después.</dd>
+      <dt>CTA</dt><dd>"¿Quieres que revise la tuya gratis? Comenta <b>REVISA</b> y te mando un video con lo que cambiaría."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">04</span><h3>Soy ingeniera y editora: esto hago por tu negocio</h3><span class="t t-mix">COMBO</span><span class="t" style="background:var(--code);color:var(--muted)">A CÁMARA</span></header><dl>
+      <dt>Gancho</dt><dd>"La mayoría de negocios tiene uno de estos dos problemas, y yo resuelvo los dos."</dd>
+      <dt>Problema</dt><dd>"Problema 1: nadie ve tus videos. Problema 2: los que te ven no tienen dónde escribirte ni confiar en ti."</dd>
+      <dt>Solución</dt><dd>"Soy Ana, ingeniera en sistemas. Edito Reels que la gente ve completos y hago webs que convierten esas visitas en mensajes de WhatsApp." (Muestra clips de tus proyectos.)</dd>
+      <dt>CTA</dt><dd>"Comenta <b>COMBO</b> y te explico cómo trabajo las dos cosas juntas."</dd>
+    </dl></article>
+  </div>
+
+  <div class="week">Semana 2 <span>Educar y anclar precio</span></div>
+  <div class="scripts">
+    <article class="script"><header><span class="n">05</span><h3>¿Cuánto cuesta una página web en 2026?</h3><span class="t t-web">WEB</span><span class="t" style="background:var(--code);color:var(--muted)">A CÁMARA</span></header><dl>
+      <dt>Gancho</dt><dd>"Te cobraron $50 por una web… o te pidieron $2.000. ¿Quién tiene razón?"</dd>
+      <dt>Problema</dt><dd>"La de $50 es una plantilla que no abre bien en el celular. La de $2.000 quizás es más de lo que tu negocio necesita."</dd>
+      <dt>Solución</dt><dd>"Depende de lo que tenga que hacer: que te escriban, que venda o que muestre tu trabajo. Cada caso tiene su rango."</dd>
+      <dt>CTA</dt><dd>"Comenta <b>PRECIO</b> y te mando los rangos reales y qué incluye cada uno."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">06</span><h3>Por qué nadie ve tus Reels: los primeros 3 segundos</h3><span class="t t-vid">VIDEO</span><span class="t" style="background:var(--code);color:var(--muted)">A CÁMARA</span></header><dl>
+      <dt>Gancho</dt><dd>"Tu video no es malo. Tus primeros 3 segundos sí."</dd>
+      <dt>Problema</dt><dd>"Empiezas con 'Hola, bienvenidos, hoy les quiero hablar de…' y la gente ya se fue. Instagram decide en segundos si muestra tu video."</dd>
+      <dt>Solución</dt><dd>"Empieza con el resultado o con el problema. En vez de 'Hola, soy dentista', di 'Este error te está manchando los dientes'." (Muestra el ejemplo en pantalla.)</dd>
+      <dt>CTA</dt><dd>"Comenta <b>GANCHO</b> y te mando 20 ganchos listos para tu negocio."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">07</span><h3>Soy ingeniera, no solo diseñadora</h3><span class="t t-web">WEB</span><span class="t" style="background:var(--code);color:var(--muted)">A CÁMARA</span></header><dl>
+      <dt>Gancho</dt><dd>"Me preguntan por qué cobro más que alguien que hace webs con plantilla. Te lo explico en 30 segundos."</dd>
+      <dt>Problema</dt><dd>"Una plantilla se ve bonita, pero es lenta, se rompe en el celular y la gente no te escribe."</dd>
+      <dt>Solución</dt><dd>"Soy ingeniera en sistemas: hice el sistema de postgrado de la UNEFA. Tu web la construyo para que cargue rápido y convierta visitas en mensajes."</dd>
+      <dt>CTA</dt><dd>"Comenta <b>WEB</b> y te mando la guía para elegir la web correcta."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">08</span><h3>Edito un Reel en 60 segundos</h3><span class="t t-vid">VIDEO</span><span class="t" style="background:var(--code);color:var(--muted)">DETRÁS DE CÁMARAS</span></header><dl>
+      <dt>Gancho</dt><dd>"Así convierto 5 minutos de grabación con el celular en un Reel de 30 segundos."</dd>
+      <dt>Problema</dt><dd>(Timelapse de la línea de tiempo) "Lo que recibo: silencios, repeticiones y tomas movidas."</dd>
+      <dt>Solución</dt><dd>"Paso 1: corto lo que sobra. Paso 2: gancho al inicio. Paso 3: subtítulos y zooms. Paso 4: música y portada." Termina mostrando el resultado.</dd>
+      <dt>CTA</dt><dd>"¿Quieres que revise tus Reels y te diga qué mejorar? Comenta <b>REEL</b>."</dd>
+    </dl></article>
+  </div>
+
+  <div class="week">Semana 3 <span>Serie "Web y Reels para un negocio real en 7 días"</span></div>
+  <div class="scripts">
+    <article class="script"><header><span class="n">09</span><h3>Ep. 1 · Conoce al negocio</h3><span class="t t-mix">COMBO</span><span class="t" style="background:var(--code);color:var(--muted)">SERIE</span></header><dl>
+      <dt>Gancho</dt><dd>"Este negocio no tiene web y sus videos tienen 200 vistas. En 7 días le voy a cambiar las dos cosas."</dd>
+      <dt>Problema</dt><dd>Entrevista corta al dueño: cómo le llegan los clientes hoy y qué le frustra.</dd>
+      <dt>Solución</dt><dd>"El plan: una web con botón de WhatsApp y 4 Reels editados. Te lo muestro todo, paso a paso."</dd>
+      <dt>CTA</dt><dd>"Comenta <b>RETO</b> para avisarte cuando salga el próximo episodio."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">10</span><h3>Ep. 2 · Grabamos sus videos solo con un celular</h3><span class="t t-vid">VIDEO</span><span class="t" style="background:var(--code);color:var(--muted)">SERIE</span></header><dl>
+      <dt>Gancho</dt><dd>"No necesitas cámara profesional. Grabamos todo con este celular."</dd>
+      <dt>Problema</dt><dd>"Los errores típicos: grabar en horizontal, a contraluz y con el ruido de la calle."</dd>
+      <dt>Solución</dt><dd>"3 trucos: luz de ventana de frente, celular a la altura de los ojos y micrófono de solapa de $10."</dd>
+      <dt>CTA</dt><dd>"Comenta <b>VIDEO</b> y te mando la guía completa para grabar tu negocio."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">11</span><h3>Ep. 3 · Diseño y programo su web</h3><span class="t t-web">WEB</span><span class="t" style="background:var(--code);color:var(--muted)">SERIE</span></header><dl>
+      <dt>Gancho</dt><dd>"De una hoja en blanco a una web funcionando en 3 días."</dd>
+      <dt>Problema</dt><dd>"Antes de diseñar, me pregunto: ¿qué tiene que hacer quien entra? Aquí: escribir por WhatsApp para pedir cita."</dd>
+      <dt>Solución</dt><dd>Timelapse Figma → código → prueba en el celular. "Todo apunta a un botón: escribir por WhatsApp."</dd>
+      <dt>CTA</dt><dd>"Comenta <b>REVISA</b> y reviso la web de tu negocio gratis."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">12</span><h3>Ep. 4 · Edito sus Reels: antes y después</h3><span class="t t-vid">VIDEO</span><span class="t" style="background:var(--code);color:var(--muted)">SERIE</span></header><dl>
+      <dt>Gancho</dt><dd>"Esto es lo que grabó el dueño… y esto es lo que va a publicar."</dd>
+      <dt>Problema</dt><dd>"La grabación dura 4 minutos y la idea importante está en el segundo 90."</dd>
+      <dt>Solución</dt><dd>"Movemos esa frase al inicio como gancho, cortamos todo lo demás, añadimos subtítulos y queda en 28 segundos."</dd>
+      <dt>CTA</dt><dd>"Comenta <b>GANCHO</b> y te mando los 20 ganchos que uso con mis clientes."</dd>
+    </dl></article>
+  </div>
+
+  <div class="week">Semana 4 <span>Prueba y oferta</span></div>
+  <div class="scripts">
+    <article class="script"><header><span class="n">13</span><h3>Ep. 5 · Entrega y reacción del cliente</h3><span class="t t-mix">COMBO</span><span class="t" style="background:var(--code);color:var(--muted)">SERIE + TESTIMONIO</span></header><dl>
+      <dt>Gancho</dt><dd>"El día 7: le muestro su web y sus videos por primera vez."</dd>
+      <dt>Problema</dt><dd>Recuerda en 3 segundos cómo estaba: sin web y con 200 vistas.</dd>
+      <dt>Solución</dt><dd>Reacción real del cliente y su opinión en 15 segundos. Si ya hay resultados (mensajes, vistas), muéstralos tal cual.</dd>
+      <dt>CTA</dt><dd>"¿Quieres que tu negocio sea el próximo? Comenta <b>COMBO</b>."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">14</span><h3>3 errores al grabar Reels de tu negocio</h3><span class="t t-vid">VIDEO</span><span class="t" style="background:var(--code);color:var(--muted)">ANTES / DESPUÉS</span></header><dl>
+      <dt>Gancho</dt><dd>"Si tus videos se ven así, la gente piensa que tu negocio es pequeño." (Toma oscura y movida.)</dd>
+      <dt>Problema</dt><dd>"Error 1: sin luz. Error 2: audio con eco. Error 3: empezar saludando."</dd>
+      <dt>Solución</dt><dd>Muestra cada error corregido en 3 segundos, con la transición antes/después.</dd>
+      <dt>CTA</dt><dd>"Comenta <b>REEL</b> y reviso tus últimos 3 videos gratis."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">15</span><h3>El botón de WhatsApp que te hace perder ventas</h3><span class="t t-web">WEB</span><span class="t" style="background:var(--code);color:var(--muted)">PANTALLA + CARA</span></header><dl>
+      <dt>Gancho</dt><dd>"Tu web tiene botón de WhatsApp… y aun así nadie te escribe. Te digo por qué."</dd>
+      <dt>Problema</dt><dd>"Está escondido abajo, abre un chat vacío y el cliente no sabe qué escribir, así que lo cierra."</dd>
+      <dt>Solución</dt><dd>"Botón flotante siempre visible y un mensaje ya escrito: 'Hola, vi tu web y quiero una cita'. Un clic y listo." (Muestra la demo en el celular.)</dd>
+      <dt>CTA</dt><dd>"Comenta <b>REVISA</b> y reviso cómo está el de tu web."</dd>
+    </dl></article>
+
+    <article class="script"><header><span class="n">16</span><h3>Tengo 3 cupos en octubre</h3><span class="t t-mix">COMBO</span><span class="t" style="background:var(--code);color:var(--muted)">A CÁMARA</span></header><dl>
+      <dt>Gancho</dt><dd>"Solo puedo tomar 3 negocios nuevos en octubre y te explico por qué."</dd>
+      <dt>Problema</dt><dd>"Trabajo cada web y cada video personalmente. Si tomo más, baja la calidad, y eso no lo hago."</dd>
+      <dt>Solución</dt><dd>"Así funciona: diagnóstico gratis de 15 minutos, eliges web, videos o las dos, y en 7 días tienes resultados para publicar."</dd>
+      <dt>CTA</dt><dd>"Comenta <b>CUPO</b> y te mando el enlace para agendar."</dd>
+    </dl></article>
+  </div>
+  <p class="note">Usa "3 cupos" solo si es verdad. Para la serie de la semana 3, busca un negocio que acepte salir en cámara a cambio de un precio especial: ganas un caso de estudio, un testimonio y 5 Reels de una sola vez.</p>
+</section>
+
+<section>
+  <span class="eyebrow">// 07 calendario</span>
+  <h2>Resumen del mes</h2>
+  <p>Lunes, miércoles, viernes y domingo. Historias en video todos los días: detrás de cámaras, una encuesta ("¿web o videos?") y la palabra clave de la semana.</p>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Semana</th><th>Lunes</th><th>Miércoles</th><th>Viernes</th><th>Domingo</th></tr></thead>
+    <tbody>
+      <tr><td><b>1</b></td><td>#01 <span class="t t-web">WEB</span></td><td>#02 <span class="t t-vid">VIDEO</span></td><td>#03 <span class="t t-web">WEB</span></td><td>#04 <span class="t t-mix">COMBO</span></td></tr>
+      <tr><td><b>2</b></td><td>#05 <span class="t t-web">WEB</span></td><td>#06 <span class="t t-vid">VIDEO</span></td><td>#07 <span class="t t-web">WEB</span></td><td>#08 <span class="t t-vid">VIDEO</span></td></tr>
+      <tr><td><b>3</b></td><td>#09 <span class="t t-mix">SERIE</span></td><td>#10 <span class="t t-vid">SERIE</span></td><td>#11 <span class="t t-web">SERIE</span></td><td>#12 <span class="t t-vid">SERIE</span></td></tr>
+      <tr><td><b>4</b></td><td>#13 <span class="t t-mix">SERIE</span></td><td>#14 <span class="t t-vid">VIDEO</span></td><td>#15 <span class="t t-web">WEB</span></td><td>#16 <span class="t t-mix">COMBO</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Reparto: 6 de web, 6 de video y 4 de combo o serie. Después de 4 semanas, mira qué palabra clave trae más chats y dale más espacio a ese servicio.</p>
+</section>
+
+<section>
+  <span class="eyebrow">// 08 producción</span>
+  <h2>Cómo grabar 4 Reels por semana sin quemarte</h2>
+  <div class="grid2">
+    <div class="box">
+      <span class="label">Rutina semanal</span>
+      <ul class="clean">
+        <li><b>Lunes (1 h):</b> escribir los 4 guiones del banco.</li>
+        <li><b>Martes (2 h):</b> grabar los 4 seguidos, cambiando de ropa o de fondo.</li>
+        <li><b>Miércoles y jueves (3 h):</b> editar, subtitular y hacer portadas.</li>
+        <li><b>Programar</b> los 4 en Meta Business Suite.</li>
+        <li><b>Todos los días (20 min):</b> historias y responder comentarios.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <span class="label">Estándar de calidad (es tu portafolio)</span>
+      <ul class="clean">
+        <li>Vertical 1080×1920, de 25 a 45 segundos.</li>
+        <li>Gancho dicho <b>y escrito</b> en pantalla en el primer segundo.</li>
+        <li>Subtítulos grandes, fuera de la zona de botones de Instagram.</li>
+        <li>Corte o zoom cada 2–3 s. Música baja debajo de la voz.</li>
+        <li>Micrófono de solapa y luz de ventana de frente.</li>
+        <li>La palabra clave, dicha y escrita al final.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">// 09 llamada de diagnóstico</span>
+  <h2>Guion de 15 minutos para cerrar</h2>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Minuto</th><th>Qué haces</th><th>Qué dices</th></tr></thead>
+    <tbody>
+      <tr><td class="num">0–2</td><td>Conectar</td><td>"Cuéntame de tu negocio: ¿cómo te llegan los clientes hoy?"</td></tr>
+      <tr><td class="num">2–6</td><td>Encontrar el dolor</td><td>Web: "¿Qué pasa si alguien te busca en Google?" · Video: "¿Cuántas vistas tienen tus Reels? ¿Cuánto tiempo pierdes editando?"</td></tr>
+      <tr><td class="num">6–9</td><td>Mostrar 2–3 problemas</td><td>Comparte pantalla con su web o sus Reels y señala lo concreto.</td></tr>
+      <tr><td class="num">9–12</td><td>Proponer</td><td>Web: 3 paquetes (recomiendas el Profesional) · Video: pack de 8 Reels · Las dos cosas: <b>combo</b>.</td></tr>
+      <tr><td class="num">12–15</td><td>Cerrar</td><td>"Si arrancamos esta semana, lo tienes el [fecha]. 50% para empezar y me pasas el material. ¿Te mando los datos?"</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Si no cierra en la llamada, sigue con tus mensajes de seguimiento a las 24 horas, 3 días y 7 días (RESPUESTAS-CLIENTES.md).</p>
+</section>
+
+<section>
+  <span class="eyebrow">// 10 anuncios + orgánico</span>
+  <h2>Cómo encaja con tu campaña de $7/día</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3>Lo que cambia</h3>
+      <ul class="clean">
+        <li>Cuando un Reel funcione solo (muchos comentarios o guardados), <b>promociónalo</b>. Suele salir más barato que un anuncio nuevo.</li>
+        <li>Prueba un segundo anuncio para <b>edición de video</b> usando el Reel #02 (antes/después). Mide su costo por conversación por separado.</li>
+        <li>Crea un público de personas que vieron tus Reels y muéstrales el #13 (testimonio) y el #16 (cupos).</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Reglas que se mantienen</h3>
+      <p>Tu plan de escalamiento sigue igual: subidas de 20–30%, un cambio a la vez y un presupuesto que depende de lo que puedes entregar. Con dos servicios, cuenta las horas de edición mensual antes de subir.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">// 11 hoja de ruta</span>
+  <h2>90 días en tres fases</h2>
+  <div class="phase">
+    <div class="box">
+      <span class="label">Días 1–30</span>
+      <h3>Cimientos</h3>
+      <ul class="clean">
+        <li>Bio, destacadas y Reels fijados</li>
+        <li>Borrar o archivar lo que no sea video</li>
+        <li>ManyChat con WEB, VIDEO y REVISA</li>
+        <li>Crear las guías de web y de grabación</li>
+        <li>Publicar los Reels #01 al #08</li>
+        <li>Cerrar los precios de edición de video</li>
+      </ul>
+    </div>
+    <div class="box">
+      <span class="label">Días 31–60</span>
+      <h3>Pruebas</h3>
+      <ul class="clean">
+        <li>Serie con un negocio real (#09–#13)</li>
+        <li>3 testimonios en video</li>
+        <li>Anuncio de edición de video en prueba</li>
+        <li>Añadir GANCHO, REEL, COMBO y RETO</li>
+        <li>Página /diagnostico publicada</li>
+      </ul>
+    </div>
+    <div class="box">
+      <span class="label">Días 61–90</span>
+      <h3>Escala</h3>
+      <ul class="clean">
+        <li>Subir los mismos Reels a TikTok y YouTube Shorts</li>
+        <li>Nueva ronda de 16 guiones según los datos</li>
+        <li>Meta: 4 clientes con pack mensual de video</li>
+        <li>Subir precios si la agenda se llena</li>
+        <li>Programa de referidos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">// 12 metas</span>
+  <h2>Qué medir cada domingo</h2>
+  <p>Son metas orientativas: ajústalas con tus datos del primer mes.</p>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Indicador</th><th>Mes 1</th><th>Mes 2</th><th>Mes 3</th></tr></thead>
+    <tbody>
+      <tr><td>Reels publicados</td><td class="num">16</td><td class="num">16</td><td class="num">16</td></tr>
+      <tr><td>Vistas promedio por Reel</td><td class="num">500</td><td class="num">1.500</td><td class="num">3.000</td></tr>
+      <tr><td>Seguidores</td><td class="num">300</td><td class="num">800</td><td class="num">1.500</td></tr>
+      <tr><td>Comentarios con palabra clave</td><td class="num">40</td><td class="num">120</td><td class="num">250</td></tr>
+      <tr><td>Llamadas de diagnóstico</td><td class="num">4</td><td class="num">10</td><td class="num">18</td></tr>
+      <tr><td>Clientes de web</td><td class="num">1–2</td><td class="num">2–3</td><td class="num">3–4</td></tr>
+      <tr><td>Clientes con pack mensual de video</td><td class="num">1</td><td class="num">2</td><td class="num">4</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Anota también en Instagram la <b>retención a los 3 segundos</b> de cada Reel. Los que retengan más te dicen qué tipo de gancho funciona con tu público.</p>
+</section>
+
+<section>
+  <span class="eyebrow">// 13 lo que no copiamos de Heras</span>
+  <h2>Credibilidad por encima del humo</h2>
+  <div class="dont">
+    <ul class="clean">
+      <li><b>Nada de cifras infladas:</b> "12 proyectos entregados" genera más confianza que "+500".</li>
+      <li><b>Nada de lujo como argumento:</b> tu cliente compra seriedad, rapidez y que le contestes.</li>
+      <li><b>Urgencia real:</b> los cupos solo si es verdad.</li>
+      <li><b>Testimonios y antes/después</b> siempre con permiso del cliente.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">// empieza hoy</span>
+  <h2>Las 5 tareas de esta semana</h2>
+  <ul class="clean" style="font-size:1.05rem">
+    <li>Cambiar la bio y crear las destacadas "Empieza aquí", "Webs" y "Antes/Después".</li>
+    <li>Conectar ManyChat y configurar <span class="kw">WEB</span> y <span class="kw">VIDEO</span>.</li>
+    <li>Definir tus precios de edición de video.</li>
+    <li>Grabar los Reels #01 al #04 en una sola tarde.</li>
+    <li>Buscar el negocio para la serie de la semana 3.</li>
+  </ul>
+</section>
+</div>

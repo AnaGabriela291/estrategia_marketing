@@ -1,0 +1,276 @@
+<title>Radiografía de Víctor Heras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,700;112,800;100,600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --ground:#F5F5F3; --surface:#FFFFFF; --ink:#17191E; --muted:#5A6170; --rule:#DEDDD8;
+  --gold:#94701F; --gold-soft:#F1E7CF; --warn:#A33A2A; --warn-soft:#F6E1DC; --ok:#2F6B4A; --ok-soft:#DDEDE2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#111216; --surface:#191B21; --ink:#ECEAE4; --muted:#A2A7B2; --rule:#2C2F37;
+    --gold:#D6AE58; --gold-soft:#2D2616; --warn:#E58A77; --warn-soft:#361D18; --ok:#7CC49A; --ok-soft:#17291F;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#111216; --surface:#191B21; --ink:#ECEAE4; --muted:#A2A7B2; --rule:#2C2F37;
+  --gold:#D6AE58; --gold-soft:#2D2616; --warn:#E58A77; --warn-soft:#361D18; --ok:#7CC49A; --ok-soft:#17291F;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:16px/1.65 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;padding-inline:20px;padding-block:0 80px}
+.wrap{max-width:780px;margin:0 auto}
+h1,h2,h3{font-family:Archivo,"Arial Narrow",system-ui,sans-serif;text-wrap:balance;line-height:1.1;margin:0}
+h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:800;font-stretch:112%;letter-spacing:-.02em}
+h2{font-size:1.65rem;font-weight:800;font-stretch:112%;letter-spacing:-.01em}
+h3{font-size:1.08rem;font-weight:700;font-stretch:100%}
+p{margin:0;max-width:66ch}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{font:500 .74rem/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+header{padding-block:56px 36px;border-bottom:1px solid var(--rule);display:grid;gap:18px}
+.lede{font-size:1.15rem;color:var(--muted)}
+.sources{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.88rem}
+.sources a{color:var(--ink);text-underline-offset:3px;text-decoration-color:var(--gold)}
+section{padding-block:48px;border-bottom:1px solid var(--rule);display:grid;gap:22px}
+.verdict{background:var(--ink);color:var(--ground);padding:28px;border-radius:4px;display:grid;gap:12px}
+.verdict p{max-width:none;font-size:1.08rem}
+.verdict strong{color:var(--gold-soft)}
+:root[data-theme="dark"] .verdict strong{color:var(--gold)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.stat{background:var(--surface);padding:18px;display:grid;gap:4px}
+.stat b{font:800 1.9rem/1 Archivo,system-ui,sans-serif;font-stretch:112%}
+.stat span{font-size:.85rem;color:var(--muted)}
+.funnel{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:f}
+.funnel li{counter-increment:f;display:grid;grid-template-columns:52px 1fr;gap:16px;padding-block:18px;border-top:1px dashed var(--rule)}
+.funnel li:first-child{border-top:0}
+.funnel li::before{content:counter(f);font:800 1.6rem/1 Archivo,system-ui,sans-serif;font-stretch:112%;color:var(--gold);width:44px;height:44px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center}
+.funnel div{display:grid;gap:6px}
+.funnel .tag{font:500 .72rem/1 "IBM Plex Mono",monospace;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.box{background:var(--surface);border:1px solid var(--rule);padding:20px;display:grid;gap:10px;align-content:start}
+ul.clean{margin:0;padding-left:1.1em;display:grid;gap:8px}
+ul.clean li::marker{color:var(--gold)}
+.tbl{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:560px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:500 .72rem/1.2 "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.kw{font:500 .82rem "IBM Plex Mono",monospace;background:var(--gold-soft);color:var(--ink);padding:2px 7px;border-radius:3px;white-space:nowrap}
+.pill{font:500 .72rem/1 "IBM Plex Mono",monospace;padding:4px 8px;border-radius:99px;white-space:nowrap}
+.hi{background:var(--ok-soft);color:var(--ok)}
+.flag{border-left:3px solid var(--warn);background:var(--warn-soft);padding:16px 18px;display:grid;gap:8px}
+.flag h3{color:var(--warn)}
+.note{font-size:.85rem;color:var(--muted)}
+.steal{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.steal li{background:var(--surface);border:1px solid var(--rule);padding:18px 20px;display:grid;gap:6px}
+a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">Análisis de competencia · 14 sep 2026</span>
+  <h1>Cómo vende Víctor Heras (Viralidad)</h1>
+  <p class="lede">Estrategia de contenido, embudo de ventas y tácticas de persuasión de @herasmedia, su canal de YouTube y viralidad.com. Todo sale de lo que se ve públicamente en sus perfiles y en el código de su web.</p>
+  <div class="sources">
+    <a href="https://www.instagram.com/herasmedia/">instagram.com/herasmedia</a>
+    <a href="https://www.instagram.com/victorherasemprendedor/">instagram.com/victorherasemprendedor</a>
+    <a href="https://www.youtube.com/@Victorherasmedia">youtube.com/@Victorherasmedia</a>
+    <a href="https://viralidad.com/">viralidad.com</a>
+  </div>
+</header>
+
+<section>
+  <div class="verdict">
+    <span class="eyebrow">En una frase</span>
+    <p>Usa <strong>contenido gratis en redes para atraer gente</strong>, les pide <strong>comentar una palabra clave</strong> a cambio de una clase o plantilla, los lleva a <strong>una web con video de ventas y pruebas de famosos</strong>, los <strong>filtra con un cuestionario</strong> y <strong>cierra la venta por llamada</strong> (la "consultoría 1 a 1"). No publica precios: vende un programa caro de mentoría por teléfono.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><b class="mono">487K</b><span>IG @victorherasemprendedor (cuenta personal, estilo de vida)</span></div>
+    <div class="stat"><b class="mono">243K</b><span>IG @herasmedia · 207 publicaciones (cuenta de captación)</span></div>
+    <div class="stat"><b class="mono">118K</b><span>YouTube · 183 videos · 4,7M vistas totales</span></div>
+    <div class="stat"><b class="mono">0</b><span>precios publicados en toda la web</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">01 · Posicionamiento</span>
+  <h2>Qué vende y a quién</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3>La promesa</h3>
+      <p>"Gana 100.000 seguidores en 90 días" y, en YouTube, "+20.000€/mes". Junta dos deseos: <em>fama</em> (seguidores) y <em>dinero</em> (clientes sin pagar anuncios). El resultado es concreto, medible y con fecha límite.</p>
+    </div>
+    <div class="box">
+      <h3>El cliente ideal</h3>
+      <p>Emprendedores, coaches, profesionales y dueños de negocio que ya venden algo y quieren clientes desde Instagram. Su cuestionario los separa por sector: marketing, salud, inmobiliaria, psicología y desarrollo personal, finanzas y "otros negocios".</p>
+    </div>
+    <div class="box">
+      <h3>El villano</h3>
+      <p>La publicidad pagada y "el algoritmo". Repite <em>"sin invertir en anuncios"</em>, <em>"100% orgánico"</em> y <em>"0€ en ads"</em>. Presenta su método como la forma de ganarle al sistema.</p>
+    </div>
+    <div class="box">
+      <h3>La autoridad prestada</h3>
+      <p>Su prueba más fuerte son los clientes famosos: Jordan Belfort ("El Lobo de Wall Street"), Sensei, Christian Villar, Anxo Pérez, Lord Ramón y Bernardo Jurado. Casi todo su contenido gira en torno a <em>"así lo hice viral para X"</em>.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">02 · Embudo de venta</span>
+  <h2>El camino exacto hasta la venta</h2>
+  <p>Esta es la secuencia real que sigue un seguidor, paso a paso:</p>
+  <ol class="funnel">
+    <li><div><span class="tag">Atraer · Reels, carruseles y YouTube</span><h3>Contenido de valor con casos famosos</h3><p>Reels tipo "Así gané 700.000 seguidores para el Lobo de Wall Street". Enseña un poco y promete el resto.</p></div></li>
+    <li><div><span class="tag">Captar · Comenta la palabra clave</span><h3>"Comenta SENSEI y te lo mando"</h3><p>Todos los textos de los Reels revisados cierran igual. El comentario le da alcance al post y abre una conversación por mensaje privado. Casi seguro usa un bot de mensajes automáticos (tipo ManyChat): no se ve desde fuera, pero no hay otra forma de responder a miles de comentarios.</p></div></li>
+    <li><div><span class="tag">Nutrir · Regalo</span><h3>Masterclass, plantilla o "mentoría filtrada"</h3><p>Por mensaje privado entrega el regalo prometido: clase gratuita, guion, sistema de hooks o test de formato. Así consigue el contacto y demuestra que sabe.</p></div></li>
+    <li><div><span class="tag">Convencer · viralidad.com</span><h3>Web con video de ventas y pruebas sociales</h3><p>Titular con la promesa, video de ventas grabado en un jet privado, logos de famosos, nota de 4,8 en Trustpilot, "+5.000 casos de éxito", "+35M€ generados" y tarjetas de clientes con ingresos mensuales (Sensei "+460.000€/mes"). Solo tiene un botón: <em>Agendar consultoría 1 a 1</em>.</p></div></li>
+    <li><div><span class="tag">Filtrar · /survey</span><h3>Cuestionario antes de reservar</h3><p>Pregunta sector y datos del negocio antes de dar la cita. Así solo llegan a la llamada personas que pueden pagar. Funciona sobre GoHighLevel/LeadConnector (se ve en el código de la web).</p></div></li>
+    <li><div><span class="tag">Cerrar · Llamada</span><h3>"Consultoría" que en realidad es una llamada de venta</h3><p>Un vendedor (closer) hace un diagnóstico y ofrece el programa de mentoría. El precio no aparece en ningún sitio: es la señal típica de un producto caro (high-ticket), normalmente de miles de euros.</p></div></li>
+    <li><div><span class="tag">Reciclar · Resultados</span><h3>Los clientes se vuelven contenido</h3><p>Los casos de éxito se convierten en Shorts ("Esta chica ganó 350.000 seguidores gracias a este método"), en historias destacadas ("100K en 10 días", "183.000€") y en tarjetas de la web. Vuelta al paso 1.</p></div></li>
+  </ol>
+</section>
+
+<section>
+  <span class="eyebrow">03 · Instagram</span>
+  <h2>Dos cuentas con dos funciones</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3>@herasmedia · la máquina de captar</h3>
+      <ul class="clean">
+        <li>Bio: "Gana 100.000 seguidores en 90 días aquí 👇" + viralidad.com.</li>
+        <li>Destacadas que funcionan como pruebas: <em>Empieza aquí, RETO 100K, Jordan Belfort 300K en 3 meses, Sensei 500K en 45 días, 100k en 10 días</em>.</li>
+        <li>Casi todo son Reels, varios por semana (6 publicados entre el 5 jul y el 13 sep de 2026).</li>
+        <li>Publicaciones fijadas: el caso Belfort, el caso Sensei y el caso Christian Villar. Las tres son su mejor prueba social.</li>
+        <li>Hashtags siempre iguales: #herasmedia #crecereninstagram #redessociales #victorheras.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>@victorherasemprendedor · el estilo de vida</h3>
+      <ul class="clean">
+        <li>Más seguidores (487K) y solo 22 publicaciones: pocas y muy cuidadas.</li>
+        <li>Ferrari Mansory, oficinas en Miami, España campeona del mundo, frases de "todo o nada".</li>
+        <li>Construye el deseo ("quiero su vida") y la credibilidad ("le va bien, así que su método funciona").</li>
+        <li>También mete llamadas a la acción camufladas: <em>"Así me robaron el Ferrari…"</em> termina con <em>"comenta CLASE"</em>.</li>
+        <li>Destacadas: <em>Resultados, Clientes, 183.000€, 20.000€, Mamá</em>. Mezcla dinero con lado humano.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Reels recientes: palabra clave y respuesta</h3>
+  <p class="note">En Instagram normal los comentarios son una fracción pequeña de los likes. Aquí suelen acercarse o superarlos, lo que muestra que el "comenta la palabra" funciona muy bien.</p>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Fecha</th><th>Palabra clave</th><th>Regalo prometido</th><th style="text-align:right">Likes</th><th style="text-align:right">Comentarios</th><th style="text-align:right">Coment./likes</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">15 ene 26</td><td><span class="kw">SENSEI</span></td><td>Metodología de 130K a 1M seguidores</td><td class="num">30.000</td><td class="num">14.000</td><td class="num">0,47</td></tr>
+      <tr><td class="mono">31 mar 25</td><td><span class="kw">VIRAL</span></td><td>Clase: 170K seguidores en 5 días con Christian Villar</td><td class="num">11.000</td><td class="num">19.000</td><td class="num"><span class="pill hi">1,73</span></td></tr>
+      <tr><td class="mono">29 jul 26</td><td><span class="kw">CUENTA</span></td><td>Plan personalizado para tu cuenta</td><td class="num">7.799</td><td class="num">9.213</td><td class="num"><span class="pill hi">1,18</span></td></tr>
+      <tr><td class="mono">10 ago 26</td><td><span class="kw">BERNARDO</span></td><td>Mentoría del caso Bernardo Jurado</td><td class="num">10.000</td><td class="num">7.876</td><td class="num">0,79</td></tr>
+      <tr><td class="mono">05 jul 26</td><td><span class="kw">CCN</span></td><td>Sistema paso a paso por nicho</td><td class="num">8.193</td><td class="num">4.438</td><td class="num">0,54</td></tr>
+      <tr><td class="mono">12 jul 26</td><td><span class="kw">GUIÓN</span></td><td>Cómo hacer un guion "antes de que lo borre"</td><td class="num">8.015</td><td class="num">4.426</td><td class="num">0,55</td></tr>
+      <tr><td class="mono">08 jul 26</td><td><span class="kw">FORMATO</span></td><td>Test de 5 preguntas: qué formato usar</td><td class="num">3.168</td><td class="num">3.829</td><td class="num"><span class="pill hi">1,21</span></td></tr>
+      <tr><td class="mono">19 ago 26</td><td><span class="kw">NICHO</span></td><td>Sistema de conversión orgánico por nicho</td><td class="num">7.699</td><td class="num">3.121</td><td class="num">0,41</td></tr>
+      <tr><td class="mono">13 sep 26</td><td><span class="kw">PLÁTANO</span></td><td>Por qué tu cuenta no tiene visitas</td><td class="num">4.272</td><td class="num">2.097</td><td class="num">0,49</td></tr>
+      <tr><td class="mono">22 dic 25</td><td><span class="kw">LOBO</span></td><td>Masterclass: 700K seguidores para Jordan Belfort</td><td class="num">4.400</td><td class="num">1.567</td><td class="num">0,36</td></tr>
+      <tr><td class="mono">08 sep 26</td><td><span class="kw">GANCHO</span></td><td>Hooks según tu nicho</td><td class="num">2.254</td><td class="num">940</td><td class="num">0,42</td></tr>
+      <tr><td class="mono">23 ago 26</td><td><span class="kw">MÉTODO</span></td><td>"6 años que te puedes ahorrar"</td><td class="num">2.680</td><td class="num">688</td><td class="num">0,26</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">04 · YouTube</span>
+  <h2>El canal que da confianza</h2>
+  <p>En Instagram consigue alcance; en YouTube se gana la confianza. Quien ve 20 minutos de un video llega a la llamada casi convencido. Publica <strong>uno o dos videos largos por semana</strong>.</p>
+  <div class="grid2">
+    <div class="box">
+      <h3>Tipos de título que repite</h3>
+      <ul class="clean">
+        <li><b>Caso famoso:</b> "Así Hice los Guiones Virales Para Jordan Belfort (+5.6M de Visitas)".</li>
+        <li><b>Cópiame:</b> "Así Creo el Contenido de Instagram de 30 Días en 1 Hora (Cópiame)".</li>
+        <li><b>Miedo o urgencia:</b> "Por Qué Están Fracasando la Mayoría de Marcas Personales Este 2026" (29K vistas).</li>
+        <li><b>Algoritmo:</b> "Así Funciona el Algoritmo de Redes Sociales ACTUALMENTE" (41K, su video más visto de los recientes).</li>
+        <li><b>Riqueza:</b> "Me Hice Millonario con 24 Años", "Cómo Gestiono mi Tiempo Siendo un CEO del 1%".</li>
+        <li><b>IA:</b> "Claude ha Reemplazado mi Equipo de Marketing en 16 Minutos".</li>
+        <li><b>Curso gratis:</b> "Curso Gratis: Cómo llegar a 100.000 Seguidores en 90 Días".</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Tácticas del canal</h3>
+      <ul class="clean">
+        <li><b>La primera línea de cada descripción es venta:</b> "Agenda una consultoría 1-1…" + enlace bit.ly.</li>
+        <li><b>Mide cada video por separado:</b> los bit.ly llevan a viralidad.com con <span class="mono">utm_campaign=Video+136</span>. Sabe exactamente qué video le trae clientes.</li>
+        <li><b>Serie tipo reality:</b> "De 0 a 100.000 Seguidores en 30 Días" (9 episodios) con juegos: "Elige la puerta", "Explota el globo", "Adivina el reel más viral".</li>
+        <li><b>Shorts de testimonios:</b> "Este señor ganó 105.000 seguidores en 6 meses gracias a este método".</li>
+        <li><b>Listas de reproducción de venta:</b> "Nuestros casos de éxito", "Máster Marca Personal".</li>
+        <li><b>Detrás de cámaras:</b> graba el día de rodaje en casa de Belfort en Connecticut. Enseña el proceso real.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">05 · Persuasión</span>
+  <h2>Los disparadores psicológicos que usa</h2>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Disparador</th><th>Cómo lo aplica</th></tr></thead>
+    <tbody>
+      <tr><td><b>Autoridad</b></td><td>Jordan Belfort, Sensei y Anxo Pérez; logos en la web; "utilizado por los mayores creadores de habla hispana".</td></tr>
+      <tr><td><b>Prueba social</b></td><td>+5.000 casos, 4,8 en Trustpilot, tarjetas de clientes con €/mes, Shorts de testimonios.</td></tr>
+      <tr><td><b>Resultado concreto</b></td><td>100.000 seguidores · 90 días · 20.000€/mes. Siempre números exactos y plazos.</td></tr>
+      <tr><td><b>Escasez y urgencia</b></td><td>"Te lo mando antes de que lo borren", "mentoría filtrada", "antes de que borre todo el sistema".</td></tr>
+      <tr><td><b>Reciprocidad</b></td><td>Regala plantillas, clases y guiones antes de pedir la llamada.</td></tr>
+      <tr><td><b>Aspiración</b></td><td>Jet privado en el video de ventas, Ferrari, Miami, "CEO del 1%", "millonario con 24 años".</td></tr>
+      <tr><td><b>Enemigo común</b></td><td>El algoritmo y los anuncios pagados. "Sin publicidad de pago".</td></tr>
+      <tr><td><b>Curiosidad</b></td><td>Palabras raras como "PLÁTANO" que hacen comentar para descubrir qué hay detrás.</td></tr>
+      <tr><td><b>Compromiso gradual</b></td><td>Comentar → leer el mensaje privado → ver la clase → rellenar el cuestionario → llamada. Cada paso pide un poco más.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">06 · Herramientas</span>
+  <h2>Herramientas detectadas</h2>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Herramienta</th><th>Para qué</th><th>Cómo lo sé</th></tr></thead>
+    <tbody>
+      <tr><td><b>GoHighLevel / LeadConnector</b></td><td>Web, cuestionario, CRM y agenda de llamadas</td><td>Script de leadconnectorhq.com en la web</td></tr>
+      <tr><td><b>ConverteAI (vTurb)</b></td><td>Reproductor del video de ventas, con estadísticas de retención</td><td>Scripts de converteai.net</td></tr>
+      <tr><td><b>Bitly + UTM</b></td><td>Saber qué video o red trae cada cliente</td><td>Enlaces de las descripciones de YouTube</td></tr>
+      <tr><td><b>Trustpilot</b></td><td>Reseñas de terceros como prueba</td><td>Enlace en la parte superior de la web</td></tr>
+      <tr><td><b>Automatización de mensajes (probable)</b></td><td>Responder "comenta X" por mensaje privado</td><td>Suposición: no se ve públicamente</td></tr>
+      <tr><td><b>Cloudflare</b></td><td>Velocidad y estadísticas de la web</td><td>Script beacon</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">07 · Con ojo crítico</span>
+  <h2>Lo que no se puede comprobar</h2>
+  <div class="flag">
+    <h3>Tómalo como publicidad, no como datos</h3>
+    <p>Las cifras de la web ("+35.000.000€ generados", "+100M seguidores", "68,5% de conversión") no tienen fuente. Además, algunas no cuadran entre sí: aparecen "+35M€" y "+32M€" en la misma página, y "+5.000 casos" frente a "+100 casos verificados". Los ingresos de sus clientes famosos no significan que los ganen <em>gracias</em> a su método. La web tampoco explica qué incluye el programa ni cuánto cuesta.</p>
+  </div>
+  <p class="note">Esto no quita que el sistema funcione como máquina de ventas. Es justo al revés: es un ejemplo de manual del modelo "contenido orgánico → palabra clave → web con video → llamada de venta".</p>
+</section>
+
+<section>
+  <span class="eyebrow">08 · Para ANAINNOVA</span>
+  <h2>Qué copiar, adaptado a tu escala</h2>
+  <ul class="steal">
+    <li><h3>Termina cada Reel con "Comenta [PALABRA] y te lo mando"</h3><p>Crea 3 o 4 regalos sencillos (guía en PDF, checklist, mini clase de 10 minutos) y automatiza la respuesta por mensaje privado con ManyChat. Es la táctica que más le rinde y cuesta muy poco.</p></li>
+    <li><h3>Convierte cada cliente en contenido</h3><p>Aunque no tengas famosos, el formato "Así conseguimos X para [cliente]" con números reales es tu mejor prueba. Ponlo en publicaciones fijadas, destacadas y en tu web.</p></li>
+    <li><h3>Una promesa con número y plazo</h3><p>Nada de "te ayudo con tus redes". Algo como "Tus primeros 10 clientes desde Instagram en 60 días". Cuanto más concreto, mejor.</p></li>
+    <li><h3>Una web con un solo botón</h3><p>Titular con la promesa, video corto, pruebas y un botón para agendar. Añade 3 o 4 preguntas antes de la cita para no perder tiempo con curiosos.</p></li>
+    <li><h3>Mide cada video con enlaces UTM</h3><p>Usa un enlace distinto en cada bio, historia y video para saber de dónde salen tus ventas y hacer más de lo que funciona.</p></li>
+    <li><h3>Usa YouTube para dar confianza</h3><p>Un video largo cada semana o dos resolviendo las dudas de tu cliente, con el enlace de agendar en la primera línea de la descripción.</p></li>
+    <li><h3>Mantén la credibilidad</h3><p>No hace falta el jet ni cifras infladas. Mostrar el proceso y datos que se puedan comprobar te diferencia justo en lo que él es más débil.</p></li>
+  </ul>
+  <p class="note">Datos recogidos el 14 sep 2026 de páginas públicas. Las cifras de seguidores, likes y vistas cambian a diario.</p>
+</section>
+</div>
