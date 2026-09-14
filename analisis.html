@@ -72,8 +72,36 @@ td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;t
 .steal li{background:var(--surface);border:1px solid var(--rule);padding:18px 20px;display:grid;gap:6px}
 a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 </style>
-</head>
+<style>
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+section[id],.week[id]{scroll-margin-top:118px}
+.topnav{--nav-accent:var(--pink, var(--gold));position:sticky;top:0;z-index:50;margin-inline:-20px;padding-inline:20px;background:var(--ground);border-bottom:1px solid var(--rule)}
+.topnav-in{max-width:840px;margin:0 auto}
+.topnav-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 8px}
+.topnav a{color:var(--ink);text-decoration:none}
+.topnav a:focus-visible{outline:2px solid var(--nav-accent);outline-offset:2px;border-radius:6px}
+.topnav-brand{font:800 .95rem/1 Unbounded,Archivo,system-ui,sans-serif;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.topnav-brand::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--nav-accent)}
+.topnav-pages{display:flex;gap:4px;font-size:.9rem}
+.topnav-pages a{padding:6px 11px;border-radius:8px;color:var(--muted)}
+.topnav-pages a:hover{color:var(--ink);background:var(--rule)}
+.topnav-pages a[aria-current="page"]{color:var(--ink);font-weight:700;background:var(--surface);box-shadow:inset 0 0 0 1px var(--rule)}
+.topnav-sections{position:relative;display:flex;gap:6px;overflow-x:auto;padding-block:4px 10px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.topnav-sections::-webkit-scrollbar{display:none}
+.topnav-sections a{flex:none;font-size:.82rem;padding:5px 11px;border-radius:99px;border:1px solid var(--rule);color:var(--muted);background:var(--surface);white-space:nowrap}
+.topnav-sections a:hover{color:var(--ink);border-color:var(--nav-accent)}
+.topnav-sections a[aria-current="location"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.topnav-sections a:last-child{margin-right:40px}
+.weeklinks{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.9rem;color:var(--muted)}
+.weeklinks a{padding:4px 10px;border-radius:8px;background:var(--code);color:var(--ink);text-decoration:none;font-weight:600}
+.weeklinks a:hover{box-shadow:inset 0 0 0 1px var(--pink)}
+.totop{position:fixed;right:18px;bottom:18px;z-index:50;font:600 .88rem/1 Figtree,"IBM Plex Sans",system-ui,sans-serif;padding:11px 15px;border-radius:99px;border:0;cursor:pointer;background:var(--ink);color:var(--ground);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.totop:focus-visible{outline:2px solid var(--pink, var(--gold));outline-offset:3px}
+@media (max-width:520px){.topnav-brand span{display:none}.topnav-pages a{padding:6px 8px}}
+</style></head>
 <body>
+<nav class="topnav" aria-label="Men&uacute;"><div class="topnav-in"><div class="topnav-bar"><a class="topnav-brand" href="/">ANAINNOVA<span>&nbsp;&middot; marketing</span></a><div class="topnav-pages"><a href="/estrategia">Estrategia</a><a href="/analisis" aria-current="page">An&aacute;lisis Heras</a></div></div><div class="topnav-sections" aria-label="Secciones de esta p&aacute;gina"><a href="#resumen">Resumen</a><a href="#posicionamiento">Posicionamiento</a><a href="#embudo">Embudo de venta</a><a href="#instagram">Instagram</a><a href="#youtube">YouTube</a><a href="#persuasion">Persuasi&oacute;n</a><a href="#herramientas">Herramientas</a><a href="#critica">Ojo cr&iacute;tico</a><a href="#anainnova">Para ANAINNOVA</a></div></div></nav>
 
 <div class="wrap">
 <header>
@@ -88,7 +116,7 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   </div>
 </header>
 
-<section>
+<section id="resumen">
   <div class="verdict">
     <span class="eyebrow">En una frase</span>
     <p>Usa <strong>contenido gratis en redes para atraer gente</strong>, les pide <strong>comentar una palabra clave</strong> a cambio de una clase o plantilla, los lleva a <strong>una web con video de ventas y pruebas de famosos</strong>, los <strong>filtra con un cuestionario</strong> y <strong>cierra la venta por llamada</strong> (la "consultoría 1 a 1"). No publica precios: vende un programa caro de mentoría por teléfono.</p>
@@ -101,7 +129,7 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   </div>
 </section>
 
-<section>
+<section id="posicionamiento">
   <span class="eyebrow">01 · Posicionamiento</span>
   <h2>Qué vende y a quién</h2>
   <div class="grid2">
@@ -124,7 +152,7 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   </div>
 </section>
 
-<section>
+<section id="embudo">
   <span class="eyebrow">02 · Embudo de venta</span>
   <h2>El camino exacto hasta la venta</h2>
   <p>Esta es la secuencia real que sigue un seguidor, paso a paso:</p>
@@ -139,7 +167,7 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   </ol>
 </section>
 
-<section>
+<section id="instagram">
   <span class="eyebrow">03 · Instagram</span>
   <h2>Dos cuentas con dos funciones</h2>
   <div class="grid2">
@@ -188,7 +216,7 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   </div>
 </section>
 
-<section>
+<section id="youtube">
   <span class="eyebrow">04 · YouTube</span>
   <h2>El canal que da confianza</h2>
   <p>En Instagram consigue alcance; en YouTube se gana la confianza. Quien ve 20 minutos de un video llega a la llamada casi convencido. Publica <strong>uno o dos videos largos por semana</strong>.</p>
@@ -219,7 +247,7 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   </div>
 </section>
 
-<section>
+<section id="persuasion">
   <span class="eyebrow">05 · Persuasión</span>
   <h2>Los disparadores psicológicos que usa</h2>
   <div class="tbl">
@@ -240,7 +268,7 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   </div>
 </section>
 
-<section>
+<section id="herramientas">
   <span class="eyebrow">06 · Herramientas</span>
   <h2>Herramientas detectadas</h2>
   <div class="tbl">
@@ -258,7 +286,7 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   </div>
 </section>
 
-<section>
+<section id="critica">
   <span class="eyebrow">07 · Con ojo crítico</span>
   <h2>Lo que no se puede comprobar</h2>
   <div class="flag">
@@ -268,7 +296,7 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   <p class="note">Esto no quita que el sistema funcione como máquina de ventas. Es justo al revés: es un ejemplo de manual del modelo "contenido orgánico → palabra clave → web con video → llamada de venta".</p>
 </section>
 
-<section>
+<section id="anainnova">
   <span class="eyebrow">08 · Para ANAINNOVA</span>
   <h2>Qué copiar, adaptado a tu escala</h2>
   <ul class="steal">
@@ -284,5 +312,35 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 </section>
 </div>
 
-</body>
+<button class="totop" type="button" hidden>&uarr; Arriba</button>
+<script>
+(() => {
+  const bar = document.querySelector('.topnav');
+  const strip = bar.querySelector('.topnav-sections');
+  const links = [...strip.querySelectorAll('a')];
+  const targets = links.map(a => document.getElementById(a.hash.slice(1)));
+  const toTop = document.querySelector('.totop');
+  let current = -1;
+  function update() {
+    const line = bar.offsetHeight + 40;
+    let idx = 0;
+    targets.forEach((el, i) => { if (el && el.getBoundingClientRect().top <= line) idx = i; });
+    if (idx !== current) {
+      links.forEach((a, i) => i === idx ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current'));
+      const a = links[idx];
+      const sr = strip.getBoundingClientRect(), ar = a.getBoundingClientRect(); strip.scrollTo({ left: Math.max(0, strip.scrollLeft + (ar.left - sr.left) - (strip.clientWidth - ar.width) / 2), behavior: 'smooth' });
+      current = idx;
+    }
+    toTop.hidden = window.scrollY < 700;
+  }
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+  toTop.addEventListener('click', () => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    bar.querySelector('.topnav-brand').focus({ preventScroll: true });
+  });
+})();
+</script></body>
 </html>

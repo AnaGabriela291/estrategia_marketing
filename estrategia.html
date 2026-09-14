@@ -91,8 +91,36 @@ a{color:var(--pink);text-underline-offset:3px}
 a:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
 @media (max-width:520px){.script dl{grid-template-columns:1fr}.script dt{border-bottom:0;padding-bottom:0}}
 </style>
-</head>
+<style>
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+section[id],.week[id]{scroll-margin-top:118px}
+.topnav{--nav-accent:var(--pink, var(--gold));position:sticky;top:0;z-index:50;margin-inline:-20px;padding-inline:20px;background:var(--ground);border-bottom:1px solid var(--rule)}
+.topnav-in{max-width:840px;margin:0 auto}
+.topnav-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 8px}
+.topnav a{color:var(--ink);text-decoration:none}
+.topnav a:focus-visible{outline:2px solid var(--nav-accent);outline-offset:2px;border-radius:6px}
+.topnav-brand{font:800 .95rem/1 Unbounded,Archivo,system-ui,sans-serif;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.topnav-brand::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--nav-accent)}
+.topnav-pages{display:flex;gap:4px;font-size:.9rem}
+.topnav-pages a{padding:6px 11px;border-radius:8px;color:var(--muted)}
+.topnav-pages a:hover{color:var(--ink);background:var(--rule)}
+.topnav-pages a[aria-current="page"]{color:var(--ink);font-weight:700;background:var(--surface);box-shadow:inset 0 0 0 1px var(--rule)}
+.topnav-sections{position:relative;display:flex;gap:6px;overflow-x:auto;padding-block:4px 10px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.topnav-sections::-webkit-scrollbar{display:none}
+.topnav-sections a{flex:none;font-size:.82rem;padding:5px 11px;border-radius:99px;border:1px solid var(--rule);color:var(--muted);background:var(--surface);white-space:nowrap}
+.topnav-sections a:hover{color:var(--ink);border-color:var(--nav-accent)}
+.topnav-sections a[aria-current="location"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.topnav-sections a:last-child{margin-right:40px}
+.weeklinks{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.9rem;color:var(--muted)}
+.weeklinks a{padding:4px 10px;border-radius:8px;background:var(--code);color:var(--ink);text-decoration:none;font-weight:600}
+.weeklinks a:hover{box-shadow:inset 0 0 0 1px var(--pink)}
+.totop{position:fixed;right:18px;bottom:18px;z-index:50;font:600 .88rem/1 Figtree,"IBM Plex Sans",system-ui,sans-serif;padding:11px 15px;border-radius:99px;border:0;cursor:pointer;background:var(--ink);color:var(--ground);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.totop:focus-visible{outline:2px solid var(--pink, var(--gold));outline-offset:3px}
+@media (max-width:520px){.topnav-brand span{display:none}.topnav-pages a{padding:6px 8px}}
+</style></head>
 <body>
+<nav class="topnav" aria-label="Men&uacute;"><div class="topnav-in"><div class="topnav-bar"><a class="topnav-brand" href="/">ANAINNOVA<span>&nbsp;&middot; marketing</span></a><div class="topnav-pages"><a href="/estrategia" aria-current="page">Estrategia</a><a href="/analisis">An&aacute;lisis Heras</a></div></div><div class="topnav-sections" aria-label="Secciones de esta p&aacute;gina"><a href="#partida">Punto de partida</a><a href="#idea">La idea</a><a href="#posicionamiento">Posicionamiento</a><a href="#embudo">Embudo</a><a href="#perfil">Perfil</a><a href="#palabras">Palabras clave</a><a href="#formatos">Formatos</a><a href="#guiones">16 guiones</a><a href="#calendario">Calendario</a><a href="#produccion">Producci&oacute;n</a><a href="#llamada">Llamada</a><a href="#anuncios">Anuncios</a><a href="#ruta">Plan 90 d&iacute;as</a><a href="#metas">Metas</a><a href="#credibilidad">Credibilidad</a><a href="#hoy">Esta semana</a></div></div></nav>
 
 <div class="wrap">
 <header>
@@ -101,7 +129,7 @@ a:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
   <p class="lede">Un perfil de Instagram hecho solo de Reels para vender dos servicios: <strong>diseño de páginas web</strong> y <strong>edición de video</strong>. Todos los Reels usan el mismo esquema: gancho → problema → solución → palabra clave. Incluye 16 guiones, calendario, palabras clave, producción y metas.</p>
 </header>
 
-<section>
+<section id="partida">
   <span class="eyebrow">// punto de partida</span>
   <h2>Dónde estás hoy</h2>
   <div class="now">
@@ -114,7 +142,7 @@ a:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
   <p>Un perfil solo de video tiene una ventaja enorme para ti: <strong>cada Reel es también tu portafolio de edición</strong>. Si tus videos se ven bien editados, ya estás demostrando lo que vendes antes de decir una palabra.</p>
 </section>
 
-<section>
+<section id="idea">
   <div class="thesis">
     <span class="code">// la estrategia en una frase</span>
     <p class="big">Tus <span class="hv">videos</span> hacen que te encuentren. Tu <span class="hl">web</span> hace que te escriban. Yo hago las dos.</p>
@@ -122,7 +150,7 @@ a:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
   </div>
 </section>
 
-<section>
+<section id="posicionamiento">
   <span class="eyebrow">// 01 posicionamiento</span>
   <h2>A quién le hablas y qué ofreces</h2>
   <div class="grid2">
@@ -156,7 +184,7 @@ a:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
   <p class="note">Son precios de referencia pensados para mercado latino, en línea con tu tarifario de webs. Ajústalos a tus horas reales (tu regla: mínimo $12–15/hora). El pack mensual te da algo que la web no: <strong>ingreso fijo cada mes</strong>.</p>
 </section>
 
-<section>
+<section id="embudo">
   <span class="eyebrow">// 02 el embudo</span>
   <h2>El camino hasta la venta</h2>
   <ol class="funnel">
@@ -169,7 +197,7 @@ a:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
   </ol>
 </section>
 
-<section>
+<section id="perfil">
   <span class="eyebrow">// 03 perfil</span>
   <h2>Tu perfil como vitrina de video</h2>
   <div class="grid2">
@@ -211,7 +239,7 @@ anainnova.com/diagnostico</div>
   </div>
 </section>
 
-<section>
+<section id="palabras">
   <span class="eyebrow">// 04 palabras clave</span>
   <h2>Qué comentan y qué reciben</h2>
   <div class="tbl">
@@ -252,7 +280,7 @@ Cuéntame rápido:
   </div>
 </section>
 
-<section>
+<section id="formatos">
   <span class="eyebrow">// 05 formatos de video</span>
   <h2>Seis formatos que puedes repetir</h2>
   <p>No hace falta inventar cada semana: rota estos formatos. Todos siguen el esquema <strong>gancho → problema → solución → palabra clave</strong>.</p>
@@ -271,12 +299,12 @@ Cuéntame rápido:
   </div>
 </section>
 
-<section>
+<section id="guiones">
   <span class="eyebrow">// 06 banco de guiones</span>
   <h2>16 Reels listos para grabar</h2>
-  <p>Numerados en el orden del calendario. Duración ideal: 25–45 segundos.</p>
+  <p>Numerados en el orden del calendario. Duración ideal: 25–45 segundos.</p><p class="weeklinks">Ir a: <a href="#semana-1">Semana 1</a><a href="#semana-2">Semana 2</a><a href="#semana-3">Semana 3 &middot; serie</a><a href="#semana-4">Semana 4</a></p>
 
-  <div class="week">Semana 1 <span>Presentarte y demostrar</span></div>
+  <div class="week" id="semana-1">Semana 1 <span>Presentarte y demostrar</span></div>
   <div class="scripts">
     <article class="script"><header><span class="n">01</span><h3>Tu negocio solo existe en Instagram</h3><span class="t t-web">WEB</span><span class="t" style="background:var(--code);color:var(--muted)">A CÁMARA</span></header><dl>
       <dt>Gancho</dt><dd>"Si tu negocio solo existe en Instagram, estás a un reporte de desaparecer."</dd>
@@ -307,7 +335,7 @@ Cuéntame rápido:
     </dl></article>
   </div>
 
-  <div class="week">Semana 2 <span>Educar y anclar precio</span></div>
+  <div class="week" id="semana-2">Semana 2 <span>Educar y anclar precio</span></div>
   <div class="scripts">
     <article class="script"><header><span class="n">05</span><h3>¿Cuánto cuesta una página web en 2026?</h3><span class="t t-web">WEB</span><span class="t" style="background:var(--code);color:var(--muted)">A CÁMARA</span></header><dl>
       <dt>Gancho</dt><dd>"Te cobraron $50 por una web… o te pidieron $2.000. ¿Quién tiene razón?"</dd>
@@ -338,7 +366,7 @@ Cuéntame rápido:
     </dl></article>
   </div>
 
-  <div class="week">Semana 3 <span>Serie "Web y Reels para un negocio real en 7 días"</span></div>
+  <div class="week" id="semana-3">Semana 3 <span>Serie "Web y Reels para un negocio real en 7 días"</span></div>
   <div class="scripts">
     <article class="script"><header><span class="n">09</span><h3>Ep. 1 · Conoce al negocio</h3><span class="t t-mix">COMBO</span><span class="t" style="background:var(--code);color:var(--muted)">SERIE</span></header><dl>
       <dt>Gancho</dt><dd>"Este negocio no tiene web y sus videos tienen 200 vistas. En 7 días le voy a cambiar las dos cosas."</dd>
@@ -369,7 +397,7 @@ Cuéntame rápido:
     </dl></article>
   </div>
 
-  <div class="week">Semana 4 <span>Prueba y oferta</span></div>
+  <div class="week" id="semana-4">Semana 4 <span>Prueba y oferta</span></div>
   <div class="scripts">
     <article class="script"><header><span class="n">13</span><h3>Ep. 5 · Entrega y reacción del cliente</h3><span class="t t-mix">COMBO</span><span class="t" style="background:var(--code);color:var(--muted)">SERIE + TESTIMONIO</span></header><dl>
       <dt>Gancho</dt><dd>"El día 7: le muestro su web y sus videos por primera vez."</dd>
@@ -402,7 +430,7 @@ Cuéntame rápido:
   <p class="note">Usa "3 cupos" solo si es verdad. Para la serie de la semana 3, busca un negocio que acepte salir en cámara a cambio de un precio especial: ganas un caso de estudio, un testimonio y 5 Reels de una sola vez.</p>
 </section>
 
-<section>
+<section id="calendario">
   <span class="eyebrow">// 07 calendario</span>
   <h2>Resumen del mes</h2>
   <p>Lunes, miércoles, viernes y domingo. Historias en video todos los días: detrás de cámaras, una encuesta ("¿web o videos?") y la palabra clave de la semana.</p>
@@ -420,7 +448,7 @@ Cuéntame rápido:
   <p class="note">Reparto: 6 de web, 6 de video y 4 de combo o serie. Después de 4 semanas, mira qué palabra clave trae más chats y dale más espacio a ese servicio.</p>
 </section>
 
-<section>
+<section id="produccion">
   <span class="eyebrow">// 08 producción</span>
   <h2>Cómo grabar 4 Reels por semana sin quemarte</h2>
   <div class="grid2">
@@ -448,7 +476,7 @@ Cuéntame rápido:
   </div>
 </section>
 
-<section>
+<section id="llamada">
   <span class="eyebrow">// 09 llamada de diagnóstico</span>
   <h2>Guion de 15 minutos para cerrar</h2>
   <div class="tbl">
@@ -466,7 +494,7 @@ Cuéntame rápido:
   <p class="note">Si no cierra en la llamada, sigue con tus mensajes de seguimiento a las 24 horas, 3 días y 7 días (RESPUESTAS-CLIENTES.md).</p>
 </section>
 
-<section>
+<section id="anuncios">
   <span class="eyebrow">// 10 anuncios + orgánico</span>
   <h2>Cómo encaja con tu campaña de $7/día</h2>
   <div class="grid2">
@@ -485,7 +513,7 @@ Cuéntame rápido:
   </div>
 </section>
 
-<section>
+<section id="ruta">
   <span class="eyebrow">// 11 hoja de ruta</span>
   <h2>90 días en tres fases</h2>
   <div class="phase">
@@ -526,7 +554,7 @@ Cuéntame rápido:
   </div>
 </section>
 
-<section>
+<section id="metas">
   <span class="eyebrow">// 12 metas</span>
   <h2>Qué medir cada domingo</h2>
   <p>Son metas orientativas: ajústalas con tus datos del primer mes.</p>
@@ -547,7 +575,7 @@ Cuéntame rápido:
   <p class="note">Anota también en Instagram la <b>retención a los 3 segundos</b> de cada Reel. Los que retengan más te dicen qué tipo de gancho funciona con tu público.</p>
 </section>
 
-<section>
+<section id="credibilidad">
   <span class="eyebrow">// 13 lo que no copiamos de Heras</span>
   <h2>Credibilidad por encima del humo</h2>
   <div class="dont">
@@ -560,7 +588,7 @@ Cuéntame rápido:
   </div>
 </section>
 
-<section>
+<section id="hoy">
   <span class="eyebrow">// empieza hoy</span>
   <h2>Las 5 tareas de esta semana</h2>
   <ul class="clean" style="font-size:1.05rem">
@@ -573,5 +601,35 @@ Cuéntame rápido:
 </section>
 </div>
 
-</body>
+<button class="totop" type="button" hidden>&uarr; Arriba</button>
+<script>
+(() => {
+  const bar = document.querySelector('.topnav');
+  const strip = bar.querySelector('.topnav-sections');
+  const links = [...strip.querySelectorAll('a')];
+  const targets = links.map(a => document.getElementById(a.hash.slice(1)));
+  const toTop = document.querySelector('.totop');
+  let current = -1;
+  function update() {
+    const line = bar.offsetHeight + 40;
+    let idx = 0;
+    targets.forEach((el, i) => { if (el && el.getBoundingClientRect().top <= line) idx = i; });
+    if (idx !== current) {
+      links.forEach((a, i) => i === idx ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current'));
+      const a = links[idx];
+      const sr = strip.getBoundingClientRect(), ar = a.getBoundingClientRect(); strip.scrollTo({ left: Math.max(0, strip.scrollLeft + (ar.left - sr.left) - (strip.clientWidth - ar.width) / 2), behavior: 'smooth' });
+      current = idx;
+    }
+    toTop.hidden = window.scrollY < 700;
+  }
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+  toTop.addEventListener('click', () => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    bar.querySelector('.topnav-brand').focus({ preventScroll: true });
+  });
+})();
+</script></body>
 </html>
