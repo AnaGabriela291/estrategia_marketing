@@ -1,9 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "rewrites": [
-    { "source": "/estrategia", "destination": "/Estrategia-ANAINNOVA.html" },
-    { "source": "/analisis", "destination": "/Analisis-Victor-Heras-Viralidad.html" }
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/Estrategia-ANAINNOVA", "destination": "/estrategia", "permanent": true },
+    { "source": "/Analisis-Victor-Heras-Viralidad", "destination": "/analisis", "permanent": true }
   ],
   "headers": [
     {
