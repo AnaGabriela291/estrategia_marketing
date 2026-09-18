@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<style>body{margin:0}img{max-width:100%}</style>
+<title>Sistema 3×30 ANAINNOVA</title>
+<meta name="description" content="Análisis del sistema 3×30 de Víctor Heras aplicado a ANAINNOVA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{
+  --ground:#F7F5F8; --surface:#FFFFFF; --ink:#151317; --muted:#5E5866; --rule:#E4DEE7;
+  --pink:#B8309F; --pink-hl:#F58BEF; --pink-soft:#FBE4F8; --green:#23874A; --green-soft:#DDF0E3; --code:#EFEBF1;
+  --vid:#1F6FB2; --vid-soft:#DDEBF7;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F0E11; --surface:#18161B; --ink:#F1EDF2; --muted:#ABA3B2; --rule:#2B2730;
+    --pink:#F58BEF; --pink-hl:#F58BEF; --pink-soft:#33182F; --green:#6FD196; --green-soft:#15291D; --code:#211E25;
+    --vid:#7DB9F0; --vid-soft:#16263A;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F0E11; --surface:#18161B; --ink:#F1EDF2; --muted:#ABA3B2; --rule:#2B2730;
+  --pink:#F58BEF; --pink-hl:#F58BEF; --pink-soft:#33182F; --green:#6FD196; --green-soft:#15291D; --code:#211E25;
+  --vid:#7DB9F0; --vid-soft:#16263A;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:16.5px/1.65 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;padding-inline:20px;padding-block:0 90px}
+.wrap{max-width:840px;margin:0 auto}
+h1,h2{font-family:Unbounded,"Arial Black",system-ui,sans-serif;text-wrap:balance;margin:0;line-height:1.08}
+h1{font-size:clamp(2rem,6.4vw,3.5rem);font-weight:800;letter-spacing:-.02em}
+h1 mark{background:var(--pink-hl);color:#151317;padding:0 .18em;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+h2{font-size:clamp(1.35rem,3.6vw,1.8rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.06rem;font-weight:700;margin:0;text-wrap:balance}
+p{margin:0;max-width:68ch}
+.eyebrow{font:500 .76rem/1 "JetBrains Mono",ui-monospace,monospace;color:var(--pink);letter-spacing:.04em}
+header{padding-block:60px 40px;display:grid;gap:20px;border-bottom:1px solid var(--rule)}
+.lede{font-size:1.15rem;color:var(--muted)}
+section{padding-block:50px;border-bottom:1px solid var(--rule);display:grid;gap:22px}
+.now{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.now div{background:var(--surface);padding:16px 18px;display:grid;gap:4px}
+.now b{font:800 1.5rem/1.1 Unbounded,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.now span{font-size:.84rem;color:var(--muted)}
+.thesis{background:#151317;color:#F1EDF2;padding:30px;border-radius:14px;display:grid;gap:14px}
+.thesis p{max-width:none;font-size:1.08rem}
+.thesis .big{font:800 clamp(1.15rem,3vw,1.5rem)/1.3 Unbounded,system-ui,sans-serif}
+.thesis .hl{color:#F58BEF}
+.thesis .hv{color:#7DB9F0}
+.thesis .code{font:500 .78rem "JetBrains Mono",monospace;color:#F58BEF}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.box{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:20px;display:grid;gap:10px;align-content:start}
+.box .label{font:500 .72rem/1 "JetBrains Mono",monospace;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+ul.clean{margin:0;padding-left:1.1em;display:grid;gap:7px}
+ul.clean li::marker{color:var(--pink)}
+.phone{background:var(--code);border-radius:10px;padding:16px 18px;white-space:pre-wrap;font:500 .92rem/1.6 Figtree,system-ui,sans-serif;border:1px solid var(--rule)}
+.funnel{list-style:none;margin:0;padding:0;display:grid;counter-reset:f}
+.funnel li{counter-increment:f;display:grid;grid-template-columns:46px 1fr;gap:16px;padding-block:18px;border-top:1px solid var(--rule)}
+.funnel li:first-child{border-top:0}
+.funnel li::before{content:counter(f);font:800 1.05rem/1 Unbounded,system-ui,sans-serif;background:var(--pink-hl);color:#151317;width:40px;height:40px;border-radius:12px;display:grid;place-items:center}
+.funnel div{display:grid;gap:5px}
+.funnel .from{font:500 .72rem/1.3 "JetBrains Mono",monospace;color:var(--muted)}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:600px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:500 .72rem/1.2 "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--code)}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.kw{font:500 .8rem "JetBrains Mono",monospace;background:var(--pink-soft);color:var(--pink);padding:2px 8px;border-radius:5px;white-space:nowrap}
+.t{font:500 .68rem/1 "JetBrains Mono",monospace;padding:4px 7px;border-radius:5px;white-space:nowrap;letter-spacing:.04em}
+.t-web{background:var(--pink-soft);color:var(--pink)}
+.t-vid{background:var(--vid-soft);color:var(--vid)}
+.t-mix{background:var(--green-soft);color:var(--green)}
+.scripts{display:grid;gap:16px}
+.script{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--surface)}
+.script header{padding:14px 18px;background:var(--code);border-bottom:1px solid var(--rule);display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.script header h3{flex:1 1 260px}
+.script .n{font:800 .95rem/1 Unbounded,system-ui,sans-serif;color:var(--muted);font-variant-numeric:tabular-nums}
+.script dl{margin:0;display:grid;grid-template-columns:110px 1fr}
+.script dt,.script dd{margin:0;padding:10px 18px;border-bottom:1px solid var(--rule)}
+.script dt{font:500 .74rem/1.6 "JetBrains Mono",monospace;color:var(--pink)}
+.script dl > :nth-last-child(-n+2){border-bottom:0}
+.week{font:800 1rem/1 Unbounded,system-ui,sans-serif;margin-top:14px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.week span{font:400 .9rem Figtree,system-ui,sans-serif;color:var(--muted)}
+.phase{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.phase .box h3{font-family:Unbounded,system-ui,sans-serif;font-size:1rem;font-weight:800}
+.dont{border-left:4px solid var(--green);background:var(--green-soft);padding:18px 20px;border-radius:0 10px 10px 0;display:grid;gap:8px}
+.note{font-size:.86rem;color:var(--muted)}
+a{color:var(--pink);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+@media (max-width:520px){.script dl{grid-template-columns:1fr}.script dt{border-bottom:0;padding-bottom:0}}
+</style>
+<style>
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+section[id],.week[id]{scroll-margin-top:118px}
+.topnav{--nav-accent:var(--pink, var(--gold));position:sticky;top:0;z-index:50;margin-inline:-20px;padding-inline:20px;background:var(--ground);border-bottom:1px solid var(--rule)}
+.topnav-in{max-width:840px;margin:0 auto}
+.topnav-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 8px}
+.topnav a{color:var(--ink);text-decoration:none}
+.topnav a:focus-visible{outline:2px solid var(--nav-accent);outline-offset:2px;border-radius:6px}
+.topnav-brand{font:800 .95rem/1 Unbounded,Archivo,system-ui,sans-serif;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.topnav-brand::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--nav-accent)}
+.topnav-pages{display:flex;gap:4px;font-size:.9rem}
+.topnav-pages a{padding:6px 11px;border-radius:8px;color:var(--muted)}
+.topnav-pages a:hover{color:var(--ink);background:var(--rule)}
+.topnav-pages a[aria-current="page"]{color:var(--ink);font-weight:700;background:var(--surface);box-shadow:inset 0 0 0 1px var(--rule)}
+.topnav-sections{position:relative;display:flex;gap:6px;overflow-x:auto;padding-block:4px 10px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.topnav-sections::-webkit-scrollbar{display:none}
+.topnav-sections a{flex:none;font-size:.82rem;padding:5px 11px;border-radius:99px;border:1px solid var(--rule);color:var(--muted);background:var(--surface);white-space:nowrap}
+.topnav-sections a:hover{color:var(--ink);border-color:var(--nav-accent)}
+.topnav-sections a[aria-current="location"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.topnav-sections a:last-child{margin-right:40px}
+.weeklinks{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.9rem;color:var(--muted)}
+.weeklinks a{padding:4px 10px;border-radius:8px;background:var(--code);color:var(--ink);text-decoration:none;font-weight:600}
+.weeklinks a:hover{box-shadow:inset 0 0 0 1px var(--pink)}
+.totop{position:fixed;right:18px;bottom:18px;z-index:50;font:600 .88rem/1 Figtree,"IBM Plex Sans",system-ui,sans-serif;padding:11px 15px;border-radius:99px;border:0;cursor:pointer;background:var(--ink);color:var(--ground);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.totop:focus-visible{outline:2px solid var(--pink, var(--gold));outline-offset:3px}
+@media (max-width:520px){.topnav-brand span{display:none}.topnav-brand{flex:none}.topnav-pages{min-width:0;overflow-x:auto;scrollbar-width:none}.topnav-pages::-webkit-scrollbar{display:none}.topnav-pages a{padding:6px 8px;white-space:nowrap}}
+ol.clean{margin:0;display:grid;gap:7px}ol.clean li::marker{color:var(--pink);font-weight:700}code{font:500 .8rem "JetBrains Mono",monospace;background:var(--code);padding:2px 6px;border-radius:5px;word-break:break-all}
+</style></head>
+<body>
+<nav class="topnav" aria-label="Men&uacute;"><div class="topnav-in"><div class="topnav-bar"><a class="topnav-brand" href="/">ANAINNOVA<span>&nbsp;&middot; marketing</span></a><div class="topnav-pages"><a href="/estrategia">Estrategia</a><a href="/sistema-3x30" aria-current="page">Sistema 3×30</a><a href="/palabras-clave">Palabras clave</a><a href="/analisis">An&aacute;lisis Heras</a></div></div><div class="topnav-sections" aria-label="Secciones de esta p&aacute;gina"><a href="#resumen">Resumen</a><a href="#filtro">Qué es verdad</a><a href="#freno">Freno de mano</a><a href="#migracion">Migración</a><a href="#deseo">Deseo</a><a href="#conciencia">Niveles</a><a href="#cumple">Test del cumpleaños</a><a href="#ideas">10 ideas × 2</a><a href="#formatos">Formatos</a><a href="#ganchos">Ganchos</a><a href="#guiones">20 guiones</a><a href="#fotocopiadora">Fotocopiadora</a><a href="#historias">Historias</a><a href="#medir">Medir</a><a href="#ruta">Calendario</a><a href="#hoy">Esta semana</a></div></div></nav>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">// análisis del video "100.000 seguidores en 90 días" · aplicado a @anainnova_</span>
+  <h1>El sistema <mark>3×30</mark> para ANAINNOVA</h1>
+  <p class="lede">Víctor Heras propone tres bloques de 30 días: <strong>quitar el freno</strong> de la cuenta, <strong>probar</strong> 20 videos basados en referencias virales y <strong>fotocopiar</strong> lo que funcionó. Aquí está separado lo útil de lo que es venta, y convertido en un plan concreto para vender webs y edición de video.</p>
+</header>
+
+<section id="resumen">
+  <span class="eyebrow">// en una frase</span>
+  <div class="thesis">
+    <span class="code">// lo que te llevas del video</span>
+    <p class="big">Habla del <span class="hl">deseo</span> (más clientes), no de tu <span class="hv">servicio</span> (webs y edición). Prueba mucho, y repite lo que funcione.</p>
+    <p>Hoy tus guiones hablan a quien ya sabe que necesita una web o un editor. Eso es una minoría. El cambio grande es hacer Reels que entienda cualquier dueño de negocio, y que al final lo lleven a tu servicio.</p>
+  </div>
+  <div class="grid2">
+    <div class="box"><span class="label">adoptar tal cual</span><ul class="clean">
+      <li>Un solo tema en la cuenta: <b>negocios que consiguen clientes con internet</b>.</li>
+      <li>10 referencias virales → robar la <b>lógica</b>, no el video.</li>
+      <li>Cada idea en 2 formatos → 20 pruebas al mes.</li>
+      <li>El 80% del tiempo de guion va al gancho.</li>
+      <li>Lo que funciona se repite en 3 formatos. El siguiente Reel después de uno viral es del mismo tema.</li>
+      <li>Palabra clave + ManyChat + UTM por video.</li>
+    </ul></div>
+    <div class="box"><span class="label">ajustar o descartar</span><ul class="clean">
+      <li>"Los anuncios intoxican la cuenta": no está demostrado. Mantén tu campaña de mensajes, con cambios (ver abajo).</li>
+      <li>Abrir cuenta nueva: <b>no hace falta</b>. Con 45 seguidores tu cuenta no está intoxicada, está fría.</li>
+      <li>La meta de 100.000 seguidores: no es la tuya. Tu meta son <b>llamadas y clientes</b>.</li>
+      <li>"Mentorías filtradas" y urgencia fabricada: no. Choca con tu regla de credibilidad.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="filtro">
+  <span class="eyebrow">// 01 con ojo crítico</span>
+  <h2>Qué dice, qué hay de cierto y qué haces tú</h2>
+  <p>El video es también un anuncio de su consultoría, así que mezcla consejos buenos con afirmaciones que no se pueden comprobar. Esta tabla te dice qué tomar en serio.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Lo que dice</th><th>Qué hay de cierto</th><th>Para ANAINNOVA</th></tr></thead>
+    <tbody>
+      <tr><td>"Deja de publicar"</td><td>Es un gancho. Lo que quiere decir es: deja de publicar sin sistema.</td><td>Publicas más (5 por semana), pero cada Reel es una prueba con un motivo.</td></tr>
+      <tr><td>Los anuncios intoxican la cuenta</td><td>Meta no reconoce ninguna penalización por hacer anuncios. Lo que sí pasa: si "promocionas" para ganar seguidores, entran personas frías que no ven tus Reels y bajan tus ratios. Él mismo usa anuncios de <em>retargeting</em> con su cliente Alfredo.</td><td>Sigue con los $7/día con objetivo <b>mensajes</b>. No pagues por seguidores ni promociones posts para "más alcance". Más adelante, retargeting a quien vio tus Reels.</td></tr>
+      <tr><td>Comprar seguidores, grupos de interacción, sorteos y "sígueme y te sigo" dañan la cuenta</td><td>Cierto en la práctica: suman seguidores que no miran tu contenido.</td><td>Prohibido. Ni sorteos de "sigue y etiqueta".</td></tr>
+      <tr><td>Mezclar temas confunde al algoritmo</td><td>Mayormente cierto: Instagram aprende a quién mostrar tus videos por lo que publicas.</td><td>Nada de fotos personales o temas sueltos en el feed. Eso va a historias.</td></tr>
+      <tr><td>El "ratio de interés" (RI)</td><td>Es una métrica inventada por él, no de Instagram. Aun así, sirve como termómetro casero.</td><td>La usas con dos números: vistas de Reels ÷ seguidores y vistas de historias ÷ seguidores.</td></tr>
+      <tr><td>Con la migración, el primer video llegó a 1 millón</td><td>Es un caso escogido. La migración ayuda a arrancar, pero no garantiza nada.</td><td>Sí haces migración (sección 03), con expectativas normales.</td></tr>
+      <tr><td>Solo 1 de cada 5 videos funciona</td><td>Razonable. Es la parte más honesta del video.</td><td>No te desanimes por 4 videos flojos. Son información.</td></tr>
+      <tr><td>La IA no sirve para hacer contenido</td><td>La IA tiende a lo que dice todo el mundo, y lo que dice todo el mundo no destaca.</td><td>Úsala para ordenar y editar, no para inventar tus ideas ni tus ganchos.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="freno">
+  <span class="eyebrow">// 02 bloque 1 · quitar el freno de mano</span>
+  <h2>Diagnóstico de @anainnova_</h2>
+  <div class="now">
+    <div><b>45</b><span>seguidores</span></div>
+    <div><b>2</b><span>publicaciones</span></div>
+    <div><b>$7/día</b><span>anuncios de mensajes</span></div>
+    <div><b>fría</b><span>no intoxicada</span></div>
+  </div>
+  <p>Tu cuenta no tiene historial malo: no tiene historial. Por eso <strong>tu bloque 1 dura una semana, no 30 días</strong>. En esa semana dejas la cuenta lista para que el primer Reel tenga a quién mostrarse.</p>
+  <div class="grid2">
+    <div class="box"><span class="label">los dos termómetros (mídelos cada domingo)</span>
+      <div class="tbl" style="border:0"><table style="min-width:0">
+        <thead><tr><th>Ratio</th><th>Sano</th><th>Alarma</th></tr></thead>
+        <tbody>
+          <tr><td>Vistas promedio de Reels ÷ seguidores</td><td class="num">40% o más</td><td class="num">menos de 10%</td></tr>
+          <tr><td>Vistas de historias ÷ seguidores</td><td class="num">5–10% o más</td><td class="num">1% o menos</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">Son las referencias del video. Con pocos seguidores es fácil estar arriba; lo importante es que no bajen cuando crezcas.</p>
+    </div>
+    <div class="box"><span class="label">cosas que frenan (revisa hoy)</span><ul class="clean">
+      <li>Archivar cualquier publicación que no sea un Reel de tu tema.</li>
+      <li>No usar "Promocionar" con objetivo de seguidores o visitas al perfil.</li>
+      <li>El anuncio de mensajes, como anuncio aparte en el Administrador de anuncios, no como post promocionado.</li>
+      <li>Bio con un solo mensaje (web + videos = clientes por WhatsApp).</li>
+      <li>Nada de sorteos, grupos de interacción ni seguidores comprados.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="migracion">
+  <span class="eyebrow">// 03 migración de audiencia</span>
+  <h2>Calentar la cuenta con 300–500 personas reales</h2>
+  <p>El paso que más te sirve del video. Antes del primer Reel del sistema, invitas a gente que ya te conoce. Seguidores que <em>sí</em> ven tus videos hacen que Instagram muestre los siguientes a más gente.</p>
+  <div class="grid2">
+    <div class="box"><span class="label">de dónde salen</span><ul class="clean">
+      <li>Tus contactos de WhatsApp y tus estados.</li>
+      <li>Clientes y ex clientes: BidWorks, Esteban Tenreiro, NextCore, Xilapost.</li>
+      <li>Compañeros y profesores de la UNEFA.</li>
+      <li>Grupos de emprendedores y comerciantes de tu zona.</li>
+      <li>Tu cuenta personal de Instagram y tu Facebook.</li>
+      <li>Los 340 abogados de Vindex <b>no</b>: son del cliente, no tuyos.</li>
+    </ul></div>
+    <div class="box"><span class="label">mensaje para enviar (uno por uno, no en lista)</span>
+      <div class="phone">¡Hola [nombre]! 💗 Estoy arrancando en serio mi cuenta de trabajo: @anainnova_
+
+Voy a subir videos sobre cómo los negocios consiguen clientes con internet (webs, Reels, WhatsApp).
+
+¿Me apoyas siguiéndola? Y si ves un video que te sirva, compártelo con alguien que tenga negocio 🙏</div>
+    </div>
+  </div>
+  <p class="note">Meta: 300 seguidores reales antes de publicar el primer Reel de prueba. Luego pide a 10 personas cercanas que vean el primer video completo y comenten; esas primeras interacciones pesan mucho.</p>
+</section>
+
+<section id="deseo">
+  <span class="eyebrow">// 04 deseo vs problema</span>
+  <h2>Tu cliente no quiere una web. Quiere clientes.</h2>
+  <p>El video separa dos tipos de producto: los que resuelven un <b>problema</b> urgente (me duele el cuello) y los que cumplen un <b>deseo</b> (verme mejor, ganar más). Las webs y la edición de video son de deseo: nadie se despierta pensando "necesito una web". Por eso los Reels no deben hablar de webs: deben despertar el deseo que la web cumple.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Lo que vendes</th><th>Lo que compra de verdad</th><th>Deseos para tus Reels</th></tr></thead>
+    <tbody>
+      <tr><td><span class="t t-web">WEB</span></td><td>Que le escriban clientes sin perseguirlos</td><td>Verse más grande de lo que es · que lo tomen en serio · cobrar más · no depender de Instagram</td></tr>
+      <tr><td><span class="t t-vid">VIDEO</span></td><td>Que lo vean y lo elijan a él y no a la competencia</td><td>Tener un negocio lleno · verse profesional · no perder horas editando · ser "el conocido" de su zona</td></tr>
+      <tr><td><span class="t t-mix">COMBO</span></td><td>Un negocio que se vende solo mientras trabaja</td><td>Tiempo libre · clientes que llegan ya convencidos · crecer sin pagar más anuncios</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="conciencia">
+  <span class="eyebrow">// 05 niveles de conciencia</span>
+  <h2>El 90% del público está en el nivel 0 y 1</h2>
+  <p>Según el video, casi todo el mundo está en los dos primeros niveles, y casi todos los creadores hablan a los niveles 2–4. Aplicado a tu banco de 16 guiones:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Nivel</th><th>Qué piensa el dueño del negocio</th><th>Tus guiones actuales</th><th>Peso en el mes</th></tr></thead>
+    <tbody>
+      <tr><td class="num"><b>0</b></td><td>"Mi negocio va bien así." No sabe que quiere algo.</td><td>Ninguno</td><td class="num"><b>40%</b></td></tr>
+      <tr><td class="num"><b>1</b></td><td>"Quiero más clientes." No sabe cómo.</td><td>#01, serie Ep. 1</td><td class="num"><b>30%</b></td></tr>
+      <tr><td class="num"><b>2</b></td><td>"Sé que necesito web o mejores videos."</td><td>#02, #05, #06, #08, #10, #14, #15</td><td class="num">20%</td></tr>
+      <tr><td class="num"><b>3</b></td><td>"Busco quién me lo haga."</td><td>#03, #07, #11, #12, #13</td><td class="num" rowspan="2">10% (y en historias)</td></tr>
+      <tr><td class="num"><b>4</b></td><td>"Quiero el paquete de Ana."</td><td>#04, #16</td></tr>
+    </tbody>
+  </table></div>
+  <div class="dont"><b>Conclusión:</b> tus 16 guiones no se tiran. Pasan a ser el 30% "de venta", y mandan a las historias y al chat. Lo que falta son los Reels de nivel 0 y 1, los que traen gente nueva. Esos son las 10 ideas de abajo.</div>
+</section>
+
+<section id="cumple">
+  <span class="eyebrow">// 06 el filtro de cada idea</span>
+  <h2>Test del cumpleaños + tema amplio → moraleja → tu servicio</h2>
+  <div class="grid2">
+    <div class="box"><span class="label">test del cumpleaños (5–50)</span>
+      <p>Imagina que cuentas la idea en un cumpleaños familiar. Pasa el test si <b>un niño de 5 años la entiende</b> y <b>a la mitad de la familia le interesa</b>.</p>
+      <p>"Cómo optimizar el LCP de tu web" no pasa. "Esta web tarda 8 segundos en abrir y por eso nadie compra ahí" sí pasa.</p>
+    </div>
+    <div class="box"><span class="label">la estructura de "relevancia amplia"</span>
+      <p><b>Empiezas amplio</b> (dinero, negocios que conoce todo el mundo, comparaciones, algo curioso) → <b>moraleja</b> → <b>terminas en tu nicho</b> y en la palabra clave.</p>
+      <p>Así lo hizo con Jordan Belfort: un video sobre cuánto cuesta su ropa que termina hablando de ventas.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ideas">
+  <span class="eyebrow">// 07 bloque 2 · 10 ideas × 2 formatos = 20 pruebas</span>
+  <h2>Banco de ideas de nivel 0–1</h2>
+  <p>Cada idea parte de una <b>lógica viral</b> que se repite en Reels exitosos. Antes de grabar, busca un video real con esa lógica (entre 500.000 y 1 millón de vistas; 5 en español y 5 en inglés) y anota por qué funciona. Guárdalo en tu hoja de referencias. Las letras de formato están en la sección siguiente.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>Idea (gancho)</th><th>Lógica que se roba</th><th>Termina en</th><th>Formatos</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>"Así te tratan cuando tu negocio tiene web… y así cuando solo tiene Instagram"</td><td>Comparación de trato según una característica (como el video de buen crédito vs mal crédito)</td><td><span class="kw">WEB</span></td><td>F · H</td></tr>
+      <tr><td class="num">2</td><td>"Grabé el mismo plato con un teléfono de $1.000 y uno de $150. Adivina cuál es cuál"</td><td>Reto de adivinar + sorpresa: lo que cambia es la edición, no el teléfono</td><td><span class="kw">VIDEO</span></td><td>C · E</td></tr>
+      <tr><td class="num">3</td><td>"¿A cuál de estas dos pizzerías le comprarías?"</td><td>Elige entre dos opciones; la gente comenta su elección</td><td><span class="kw">COMBO</span></td><td>F · B</td></tr>
+      <tr><td class="num">4</td><td>"Le pregunté a 5 personas si le comprarían a un negocio sin página web"</td><td>Pregunta en la calle con respuestas reales (el formato PV)</td><td><span class="kw">WEB</span></td><td>F · I</td></tr>
+      <tr><td class="num">5</td><td>"El restaurante más lleno de la ciudad no es el que mejor cocina"</td><td>Opinión que va contra lo que todos creen</td><td><span class="kw">VIDEO</span></td><td>A · G</td></tr>
+      <tr><td class="num">6</td><td>"Soy ingeniera: medí cuánto tardan en abrir las webs de marcas famosas"</td><td>Marca conocida como gancho + dato medible</td><td><span class="kw">REVISA</span></td><td>B · J</td></tr>
+      <tr><td class="num">7</td><td>"Adivina cuál de estos dos Reels tiene 100 vistas y cuál 100.000"</td><td>Juego de adivinar; el público se queda hasta la respuesta</td><td><span class="kw">GANCHO</span></td><td>C · H</td></tr>
+      <tr><td class="num">8</td><td>"Busqué en Google 'dentista cerca de mí' y esto es lo que encontré"</td><td>Búsqueda en vivo que el espectador puede repetir</td><td><span class="kw">WEB</span></td><td>B · E</td></tr>
+      <tr><td class="num">9</td><td>"Dos emprendedores, mismo producto: uno vende y el otro no. La diferencia"</td><td>Historia de dos personajes con final claro</td><td><span class="kw">COMBO</span></td><td>G · A</td></tr>
+      <tr><td class="num">10</td><td>"Esto es lo que ve un cliente en los primeros 3 segundos de tu negocio"</td><td>Punto de vista del cliente (cámara subjetiva)</td><td><span class="kw">REEL</span></td><td>J · C</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Solo publica datos que puedas comprobar. Si en la idea 4 las respuestas salen al revés de lo esperado, publícalo igual: la sorpresa también funciona.</p>
+</section>
+
+<section id="formatos">
+  <span class="eyebrow">// 08 formatos</span>
+  <h2>Diez formatos para contar lo mismo de otra forma</h2>
+  <p>Elige el que explique la idea de la forma <b>más clara, más corta y más nueva</b>. Tus 6 formatos de la estrategia, más 4 que propone el video:</p>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>Formato</th><th>Cómo se hace</th></tr></thead>
+    <tbody>
+      <tr><td><b>A</b></td><td>A cámara</td><td>Tú de frente, cortes cada 2–3 s, subtítulos grandes</td></tr>
+      <tr><td><b>B</b></td><td>Pantalla + cara</td><td>Grabación de pantalla con tu cara en una esquina</td></tr>
+      <tr><td><b>C</b></td><td>Antes / después</td><td>Pantalla dividida o transición</td></tr>
+      <tr><td><b>D</b></td><td>Detrás de cámaras</td><td>Timelapse editando o programando, voz en off</td></tr>
+      <tr><td><b>E</b></td><td>Pantalla verde</td><td>Tú delante de la captura, la web o el Reel del que hablas</td></tr>
+      <tr><td><b>F</b></td><td>Pregunta a otra persona (PV)</td><td>Alguien te pregunta o tú preguntas a otros, con los objetos delante</td></tr>
+      <tr><td><b>G</b></td><td>Personajes</td><td>Dos papeles (cliente y experta, o dos dueños de negocio) actuados por ti</td></tr>
+      <tr><td><b>H</b></td><td>Dinámico</td><td>Mismo texto, cambiando de lugar en cada frase</td></tr>
+      <tr><td><b>I</b></td><td>Calle / vlog</td><td>Sales a la calle o a un negocio real con el teléfono</td></tr>
+      <tr><td><b>J</b></td><td>Selfie / subjetivo</td><td>Cámara en mano como si fuera el ojo del cliente</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="ganchos">
+  <span class="eyebrow">// 09 ganchos</span>
+  <h2>80% del tiempo en el primer 20% del video</h2>
+  <p>Nada de "hola", presentarte o "hoy les voy a explicar". Empiezas con el resultado, la sorpresa o la pregunta.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Antes</th><th>Después</th></tr></thead>
+    <tbody>
+      <tr><td>"Hoy te explico cuánto cuesta una página web."</td><td>"Te cobraron $50 por una web… o te pidieron $2.000. ¿Quién tiene razón?"</td></tr>
+      <tr><td>"Tips para que tus Reels tengan más vistas."</td><td>"Estos dos videos son el mismo. Uno tiene 100 vistas."</td></tr>
+      <tr><td>"Hola, soy Ana y hago páginas web."</td><td>"Si tu negocio solo existe en Instagram, estás a un reporte de desaparecer."</td></tr>
+      <tr><td>"La importancia de tener un botón de WhatsApp."</td><td>"Tu web tiene botón de WhatsApp… y aun así nadie te escribe."</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Escribe 5 ganchos por idea y quédate con uno. Graba el gancho 2 o 3 veces con distinta energía; el resto del video, una sola vez.</p>
+</section>
+
+<section id="guiones">
+  <span class="eyebrow">// 10 guiones completos · 10 ideas × 2 formatos</span>
+  <h2>20 guiones listos para grabar</h2>
+  <p>Cada idea tiene dos versiones (A y B) con formatos distintos. Publica primero la A de todas las ideas y luego las B, para que no salgan dos seguidas iguales. Duración: 25–45 segundos. Lo que va entre comillas se dice; lo que va en <b>[corchetes]</b> se ve o es un dato que tienes que poner tú.</p>
+  <div class="dont"><b>Antes de grabar:</b> los datos, las respuestas de la gente y las vistas tienen que ser reales. Si una prueba sale distinta a lo que dice el guion, cambia el guion, no el resultado. Los negocios de otras personas salen difuminados o con su permiso.</div>
+  <p class="weeklinks">Ir a: <a href="#g1">1</a><a href="#g2">2</a><a href="#g3">3</a><a href="#g4">4</a><a href="#g5">5</a><a href="#g6">6</a><a href="#g7">7</a><a href="#g8">8</a><a href="#g9">9</a><a href="#g10">10</a></p>
+
+  <div class="scripts">
+
+  <h3 class="week" id="g1">Idea 1 · Negocio con web vs solo Instagram <span>lógica: comparación de trato · termina en WEB</span></h3>
+
+  <article class="script"><header><span class="n">1A</span><h3>"¿Para qué quiero una web si ya tengo Instagram?"</h3><span class="t t-web">WEB</span><span class="t t-mix">F · PREGUNTA</span></header><dl>
+    <dt>0–3 s</dt><dd>[Una amiga o amigo, con el teléfono en la mano, te pregunta a cámara:] "¿Para qué quiero una página web si ya tengo Instagram?"<br>[Texto: <b>¿Web o solo Instagram?</b>]</dd>
+    <dt>3–10 s</dt><dd>[Tú sacas dos teléfonos, uno en cada mano.] "Mira. Este es tu negocio solo con Instagram. Y este es el mismo negocio con web."</dd>
+    <dt>10–25 s</dt><dd>[Teléfono izquierdo.] "Aquí un cliente te pregunta el precio… y le dices 'te escribo al privado'. Tarda horas. Se va."<br>[Teléfono derecho.] "Aquí ve los precios, las fotos y la dirección, y te escribe por WhatsApp ya decidido."<br>[Izquierdo.] "Aquí, si te cierran la cuenta, pierdes todo." [Derecho.] "Aquí la web es tuya."</dd>
+    <dt>25–32 s</dt><dd>[Amiga:] "Pero es lo mismo…" [Tú:] "No. Instagram te da vistas. La web te da confianza. Y la gente le compra al que parece más serio."</dd>
+    <dt>CTA</dt><dd>"Si quieres saber qué web necesita tu negocio, comenta <span class="kw">WEB</span> y te mando la guía."</dd>
+    <dt>Grabación</dt><dd>Dos teléfonos con capturas preparadas: un perfil lleno de "precio al DM" y una web simple con precios y botón de WhatsApp. Plano medio, las dos en cuadro.</dd>
+  </dl></article>
+
+  <article class="script"><header><span class="n">1B</span><h3>Sin web vs con web, en 5 lugares</h3><span class="t t-web">WEB</span><span class="t t-mix">H · DINÁMICO</span></header><dl>
+    <dt>0–3 s</dt><dd>[En la puerta de un local.] "Así te trata un cliente cuando tu negocio solo tiene Instagram… y así cuando tiene web."<br>[Texto: <b>SIN WEB vs CON WEB</b>]</dd>
+    <dt>3–9 s</dt><dd>[En la cocina.] "Sin web, te busca en Google y no apareces. Con web, eres el primero que ve."</dd>
+    <dt>9–15 s</dt><dd>[Caminando por la calle.] "Sin web, pregunta el precio y espera. Con web, ya lo sabe cuando te escribe."</dd>
+    <dt>15–21 s</dt><dd>[En el carro o en un banco.] "Sin web, desconfía: '¿serán serios?'. Con web, parece una empresa, aunque seas tú sola."</dd>
+    <dt>21–27 s</dt><dd>[En tu escritorio.] "Sin web, un reporte y pierdes tu cuenta. Con web, tus clientes siguen sabiendo dónde encontrarte."</dd>
+    <dt>27–32 s</dt><dd>[De vuelta a la puerta.] "La gente no le compra al mejor. Le compra al que parece más confiable."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">WEB</span> y te mando la guía para saber qué web necesita tu negocio."</dd>
+    <dt>Grabación</dt><dd>Un lugar distinto por frase y corte seco en cada cambio. Misma ropa. Texto "SIN WEB" en gris y "CON WEB" en rosa.</dd>
+  </dl></article>
+
+  <h3 class="week" id="g2">Idea 2 · Teléfono de $1.000 vs teléfono de $150 <span>lógica: adivina + sorpresa · termina en VIDEO</span></h3>
+
+  <article class="script"><header><span class="n">2A</span><h3>"¿Cuál se grabó con el teléfono caro?"</h3><span class="t t-vid">VIDEO</span><span class="t t-mix">C · ANTES/DESPUÉS</span></header><dl>
+    <dt>0–3 s</dt><dd>[Pantalla dividida: el mismo plato en video A y en video B.] "Uno de estos videos se grabó con un teléfono de $1.000 y el otro con uno de $150. ¿Cuál es cuál?"<br>[Texto: <b>¿A o B? Comenta antes de la respuesta</b>]</dd>
+    <dt>3–8 s</dt><dd>[Los dos videos siguen corriendo, con un contador 3, 2, 1.] "Piénsalo bien…"</dd>
+    <dt>8–12 s</dt><dd>[Revelación en texto grande.] "El B, el que se ve mejor, es el de <b>$150</b>."</dd>
+    <dt>12–28 s</dt><dd>[Zoom a cada detalle del video B.] "¿Qué cambió? Tres cosas que no cuestan dinero: la luz de la ventana de frente, el teléfono quieto, y la edición: cortes rápidos, color y música."</dd>
+    <dt>28–33 s</dt><dd>"Tu cliente no ve qué teléfono tienes. Ve tu edición."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">VIDEO</span> y te mando mi guía para grabar tu negocio con el celular."</dd>
+    <dt>Grabación</dt><dd>Hazlo de verdad: graba el mismo plato con los dos teléfonos. El caro, sin luz ni edición; el barato, con luz de ventana y editado. Si el caro sigue ganando, cambia el giro a "la diferencia está en la luz y la edición".</dd>
+  </dl></article>
+
+  <article class="script"><header><span class="n">2B</span><h3>"Esto lo grabé con un teléfono de $150"</h3><span class="t t-vid">VIDEO</span><span class="t t-mix">E · PANTALLA VERDE</span></header><dl>
+    <dt>0–3 s</dt><dd>[Tú delante del video B terminado.] "Esto lo grabé con un teléfono de $150. Y te voy a demostrar que el teléfono no importa."</dd>
+    <dt>3–10 s</dt><dd>[Fondo cambia al video del teléfono caro, oscuro y sin editar.] "Este es el de $1.000. Mismo plato, mismo día."</dd>
+    <dt>10–26 s</dt><dd>[Fondo: cada truco en pantalla.] "Truco 1: la luz de la ventana siempre de frente, nunca detrás. Truco 2: apoya el teléfono, no lo sostengas. Truco 3: corta todo lo que no se mueve. Nadie ve 4 segundos de un plato quieto."</dd>
+    <dt>26–32 s</dt><dd>[Fondo: los dos videos juntos.] "La cámara la tienes. Lo que falta es la edición."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">VIDEO</span> y te mando la guía completa para grabar tu negocio."</dd>
+    <dt>Grabación</dt><dd>Usa el mismo material de la 2A. En CapCut: fondo verde o recorte automático de persona. Tú señalas cada detalle con la mano.</dd>
+  </dl></article>
+
+  <h3 class="week" id="g3">Idea 3 · ¿A cuál de estas dos pizzerías le comprarías? <span>lógica: elige entre dos · termina en COMBO</span></h3>
+
+  <article class="script"><header><span class="n">3A</span><h3>Le pregunto a 3 personas: ¿pizzería A o B?</h3><span class="t t-mix">COMBO</span><span class="t t-mix">F · PREGUNTA</span></header><dl>
+    <dt>0–3 s</dt><dd>[Tú, con dos teléfonos.] "Misma pizza, mismo precio. ¿A cuál le pedirías?"<br>[Texto: <b>¿Pizzería A o B?</b>]</dd>
+    <dt>3–15 s</dt><dd>[Enseñas los teléfonos a 3 personas, una por una.] Persona 1: "[respuesta real]". Persona 2: "[respuesta real]". Persona 3: "[respuesta real]".<br>[Tú les preguntas:] "¿Por qué?" [Deja sus razones: "se ve más rica", "tiene los precios", "parece más seria"...]</dd>
+    <dt>15–25 s</dt><dd>[Tú a cámara, mostrando la A.] "La A tiene fotos oscuras y 'precio al privado'." [La B.] "La B tiene videos del queso estirándose, el menú con precios y un botón para pedir por WhatsApp."</dd>
+    <dt>25–32 s</dt><dd>"Y lo curioso: la pizza es la misma. La pizza la pruebas después. Primero compras con los ojos."</dd>
+    <dt>CTA</dt><dd>"¿Tu negocio se ve como la A o como la B? Comenta <span class="kw">COMBO</span> y te explico cómo lo convierto en la B: videos y web juntos."</dd>
+    <dt>Grabación</dt><dd>Crea dos perfiles de mentira con nombres inventados (no uses pizzerías reales). Graba a amigos o familiares que acepten salir en cámara.</dd>
+  </dl></article>
+
+  <article class="script"><header><span class="n">3B</span><h3>"Solo una de estas dos pizzerías va a vender hoy"</h3><span class="t t-mix">COMBO</span><span class="t t-mix">B · PANTALLA + CARA</span></header><dl>
+    <dt>0–3 s</dt><dd>[Pantalla con los dos perfiles lado a lado, tu cara en la esquina.] "Solo una de estas dos pizzerías va a vender esta noche. Dime en los comentarios cuál: A o B."</dd>
+    <dt>3–18 s</dt><dd>[Bajas por el perfil A.] "Fotos con flash, la última publicación hace 3 meses, y el precio… 'escríbeme'."<br>[Bajas por el perfil B.] "Videos de 10 segundos del horno, historias de hoy, enlace a su menú con precios."</dd>
+    <dt>18–28 s</dt><dd>[Abres el enlace de B: menú web, tocas el botón y se abre WhatsApp con el mensaje ya escrito.] "Un toque y ya estás pidiendo. Sin preguntar nada."</dd>
+    <dt>28–33 s</dt><dd>"La B no tiene mejor pizza. Tiene menos pasos entre tener hambre y pagar."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">COMBO</span> y te cuento cómo armo los videos y la web de tu negocio."</dd>
+    <dt>Grabación</dt><dd>Graba la pantalla del teléfono y tu cara aparte; júntalas en la edición. Los mismos perfiles inventados de la 3A.</dd>
+  </dl></article>
+
+  <h3 class="week" id="g4">Idea 4 · ¿Le comprarías a un negocio sin página web? <span>lógica: pregunta a desconocidos · termina en WEB</span></h3>
+
+  <article class="script"><header><span class="n">4A</span><h3>Pregunté a 5 personas que conozco</h3><span class="t t-web">WEB</span><span class="t t-mix">F · PREGUNTA</span></header><dl>
+    <dt>0–3 s</dt><dd>[Texto: <b>¿Le comprarías a un negocio sin web?</b>] "Le hice la misma pregunta a 5 personas. La respuesta 4 me sorprendió."</dd>
+    <dt>3–22 s</dt><dd>[Cortes rápidos, una persona por plano.] Tú: "Si buscas un dentista y no aparece en Google ni tiene página, ¿le escribirías?"<br>[Respuestas reales de 5 personas, 3 segundos cada una. Deja la respuesta que sorprenda en el cuarto lugar.]</dd>
+    <dt>22–28 s</dt><dd>[Contador en pantalla: <b>[X] de 5 dijeron que no</b>.] "¿Y por qué?" [Repites la razón más común que te dieron.]</dd>
+    <dt>28–34 s</dt><dd>"Tu cliente no te lo dice. Simplemente le escribe a otro."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">WEB</span> y te mando la guía para saber qué web necesita tu negocio."</dd>
+    <dt>Grabación</dt><dd>Familia, compañeros o vecinos, en la casa o en la oficina. Pide permiso para publicarlo. Si la mayoría dice "sí le escribiría", publícalo igual con el gancho "Pensé que dirían que no…".</dd>
+  </dl></article>
+
+  <article class="script"><header><span class="n">4B</span><h3>La misma pregunta, en la calle</h3><span class="t t-web">WEB</span><span class="t t-mix">I · CALLE</span></header><dl>
+    <dt>0–3 s</dt><dd>[Tú caminando en un centro comercial o una plaza.] "Hoy salí a preguntar si la gente confía en un negocio que no tiene página web."</dd>
+    <dt>3–24 s</dt><dd>[4–5 personas desconocidas, con micrófono.] "Vas a gastar $100 en un negocio que encontraste en Instagram. No tiene web. ¿Compras o no?"<br>[Respuestas reales. Termina con la más clara.]</dd>
+    <dt>24–30 s</dt><dd>[Tú de nuevo, caminando.] "Lo que más repitieron: [la razón más común, dicha tal cual]."</dd>
+    <dt>30–35 s</dt><dd>"Una web no es un lujo. Es lo que revisa tu cliente antes de darte su dinero."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">WEB</span> y te mando la guía."</dd>
+    <dt>Grabación</dt><dd>Micrófono de solapa o de mano, pregunta siempre igual. Pide permiso antes de grabar a cada persona. Subtítulos grandes porque en la calle hay ruido.</dd>
+  </dl></article>
+
+  <h3 class="week" id="g5">Idea 5 · El restaurante más lleno no es el que mejor cocina <span>lógica: contra lo que todos creen · termina en VIDEO</span></h3>
+
+  <article class="script"><header><span class="n">5A</span><h3>"No es el que mejor cocina"</h3><span class="t t-vid">VIDEO</span><span class="t t-mix">A · A CÁMARA</span></header><dl>
+    <dt>0–3 s</dt><dd>"El restaurante más lleno de tu ciudad no es el que mejor cocina."<br>[Texto: <b>No es la comida</b>]</dd>
+    <dt>3–10 s</dt><dd>"Piénsalo. Antes de probar la comida, ya decidiste ir. ¿Cuándo lo decidiste? Mirando el teléfono."</dd>
+    <dt>10–26 s</dt><dd>"Tres cosas deciden a dónde vas a comer. Uno: un video donde ves la comida de cerca, humeando. Dos: que lo encuentras en Google con fotos y horario. Tres: que reservas o pides con un mensaje, sin esperar que te respondan."<br>[Clips genéricos de comida para cada punto.]</dd>
+    <dt>26–33 s</dt><dd>"Cocinar bien hace que vuelvas. Verse bien hace que vayas la primera vez."</dd>
+    <dt>CTA</dt><dd>"Si tu negocio es bueno pero nadie lo ve, comenta <span class="kw">VIDEO</span> y te mando la guía para grabarlo con el celular."</dd>
+    <dt>Grabación</dt><dd>A cámara, cortes cada 2–3 segundos. Mete clips de comida que hayas grabado tú o de un cliente, con permiso.</dd>
+  </dl></article>
+
+  <article class="script"><header><span class="n">5B</span><h3>Dos cocineros, un local lleno y otro vacío</h3><span class="t t-vid">VIDEO</span><span class="t t-mix">G · PERSONAJES</span></header><dl>
+    <dt>0–3 s</dt><dd>[Cocinero 1, con delantal, de brazos cruzados.] "Yo cocino mejor que él y tengo el local vacío. ¿Cómo es posible?"</dd>
+    <dt>3–12 s</dt><dd>[Cocinero 2, con gorra.] "¿Cuándo fue la última vez que subiste un video?" [C1:] "Subí la foto del menú… en marzo."</dd>
+    <dt>12–24 s</dt><dd>[C2 le enseña su teléfono.] "Yo subo 10 segundos del queso derritiéndose, todos los días. La gente lo ve a las 6, tiene hambre a las 7 y a las 8 está aquí."</dd>
+    <dt>24–30 s</dt><dd>[C1, mirando a cámara.] "O sea, que no me faltan clientes…" [C2:] "Te faltan videos."</dd>
+    <dt>CTA</dt><dd>[Tú, sin personaje.] "Si eres el cocinero 1, comenta <span class="kw">VIDEO</span> y te mando la guía para grabar."</dd>
+    <dt>Grabación</dt><dd>Haces los dos papeles con un cambio de ropa (delantal / gorra) y te grabas desde dos ángulos. Clips de comida en el minuto 12–24.</dd>
+  </dl></article>
+
+  <h3 class="week" id="g6">Idea 6 · Medí cuánto tardan las webs de marcas famosas <span>lógica: marca conocida + dato medible · termina en REVISA</span></h3>
+
+  <article class="script"><header><span class="n">6A</span><h3>"Soy ingeniera y medí las webs de 3 marcas famosas"</h3><span class="t t-web">WEB</span><span class="t t-mix">B · PANTALLA + CARA</span></header><dl>
+    <dt>0–3 s</dt><dd>"Soy ingeniera en sistemas y medí cuánto tardan en abrir en el teléfono las webs de 3 marcas famosas. Una me sorprendió."</dd>
+    <dt>3–18 s</dt><dd>[Pantalla de PageSpeed Insights, versión móvil.] "Marca 1: <b>[X] segundos</b>. Marca 2: <b>[X] segundos</b>. Marca 3…" [Pausa.] "<b>[X] segundos</b>." [Tu reacción real.]</dd>
+    <dt>18–27 s</dt><dd>"¿Por qué importa? Según un estudio de Google, más de la mitad de la gente abandona una página en el teléfono si tarda más de 3 segundos en abrir. Esas marcas se lo pueden permitir. Tu negocio, no."</dd>
+    <dt>27–33 s</dt><dd>[Escribes una web de ejemplo en la herramienta.] "Y esto es lo que tarda la web de un negocio pequeño promedio: <b>[X] segundos</b>."</dd>
+    <dt>CTA</dt><dd>"¿Quieres saber cuánto tarda la tuya? Comenta <span class="kw">REVISA</span> y te mando un video con lo que cambiaría."</dd>
+    <dt>Grabación</dt><dd>Mide de verdad en pagespeed.web.dev el mismo día que grabas y anota las cifras. Usa marcas muy conocidas. El negocio pequeño, que sea uno tuyo o de un cliente con permiso.</dd>
+  </dl></article>
+
+  <article class="script"><header><span class="n">6B</span><h3>"Estás en la cola del banco…"</h3><span class="t t-web">WEB</span><span class="t t-mix">J · SUBJETIVO</span></header><dl>
+    <dt>0–3 s</dt><dd>[Cámara como si fueran los ojos del cliente, en una cola.] "Estás en la cola del banco y buscas un dentista para mañana."</dd>
+    <dt>3–14 s</dt><dd>[Tu mano toca un resultado en Google. Pantalla blanca cargando. Texto contando: <b>1… 2… 3… 4…</b>] [Voz en off:] "Uno, dos, tres, cuatro…"</dd>
+    <dt>14–20 s</dt><dd>[El dedo vuelve atrás y toca el siguiente resultado, que abre al instante con botón de WhatsApp.] "Ya está. Le escribiste al otro."</dd>
+    <dt>20–30 s</dt><dd>[Tú a cámara.] "El primer dentista nunca sabrá que perdió un paciente. Así se pierden clientes todos los días: no por malos, sino por lentos. Y la mayoría de las webs lentas se arreglan."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">REVISA</span> y miro gratis cuánto tarda la web de tu negocio."</dd>
+    <dt>Grabación</dt><dd>Graba la pantalla del teléfono con la mano visible. Oculta los nombres de los negocios reales o usa webs de ejemplo tuyas.</dd>
+  </dl></article>
+
+  <h3 class="week" id="g7">Idea 7 · Adivina cuál Reel tiene 100 vistas y cuál 100.000 <span>lógica: juego de adivinar · termina en GANCHO</span></h3>
+
+  <article class="script"><header><span class="n">7A</span><h3>"Estos dos Reels dicen lo mismo"</h3><span class="t t-vid">VIDEO</span><span class="t t-mix">C · ANTES/DESPUÉS</span></header><dl>
+    <dt>0–3 s</dt><dd>[Pantalla dividida con dos Reels.] "Uno tiene <b>[pocas]</b> vistas y el otro <b>[muchas]</b>. Dicen exactamente lo mismo. ¿Cuál es cuál?"</dd>
+    <dt>3–8 s</dt><dd>[Los dos corren 3 segundos cada uno.] "Te doy 3 segundos… lo mismo que te da la gente."</dd>
+    <dt>8–11 s</dt><dd>[Revelas las cifras reales encima de cada uno.]</dd>
+    <dt>11–28 s</dt><dd>"La diferencia está en el primer segundo. El que no funcionó empieza con 'Hola, bienvenidos'. El que funcionó empieza con el resultado. Además tiene el gancho escrito en pantalla y un corte cada 2 segundos."<br>[Marcas cada diferencia con un círculo.]</dd>
+    <dt>28–32 s</dt><dd>"Tu video no es malo. Tus primeros 3 segundos sí."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">GANCHO</span> y te mando 20 ganchos para empezar tus videos."</dd>
+    <dt>Grabación</dt><dd>Usa solo Reels tuyos o de clientes que te den permiso, con las vistas reales. Si todavía no tienes el par, graba este video cuando tengas uno.</dd>
+  </dl></article>
+
+  <article class="script"><header><span class="n">7B</span><h3>El mismo video con 3 comienzos distintos</h3><span class="t t-vid">VIDEO</span><span class="t t-mix">H · DINÁMICO</span></header><dl>
+    <dt>0–3 s</dt><dd>[Lugar 1.] "Te voy a enseñar por qué un video tiene 100 vistas y otro 100.000. Mira estos tres comienzos."</dd>
+    <dt>3–9 s</dt><dd>[Lugar 2. Texto: <b>COMIENZO 1 ❌</b>] "Hola, ¿cómo están? Hoy les quiero hablar de…" [Deslizas el dedo como quien pasa el video.]</dd>
+    <dt>9–15 s</dt><dd>[Lugar 3. Texto: <b>COMIENZO 2 😐</b>] "Tres consejos para tu negocio." [Deslizas otra vez.]</dd>
+    <dt>15–22 s</dt><dd>[Lugar 4. Texto: <b>COMIENZO 3 ✅</b>] "Este error hace que tus clientes se vayan antes de ver tu precio." [Te quedas quieta, mirando a cámara.]</dd>
+    <dt>22–30 s</dt><dd>[Lugar 5.] "El tercero te da una razón para quedarte. Los otros dos te dan una razón para irte."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">GANCHO</span> y te mando los 20 ganchos que uso."</dd>
+    <dt>Grabación</dt><dd>Un lugar por comienzo, corte seco. Efecto de deslizar en la edición en los dos primeros.</dd>
+  </dl></article>
+
+  <h3 class="week" id="g8">Idea 8 · Busqué "dentista cerca de mí" en Google <span>lógica: búsqueda en vivo · termina en WEB</span></h3>
+
+  <article class="script"><header><span class="n">8A</span><h3>"Busqué un dentista en [tu ciudad] y pasó esto"</h3><span class="t t-web">WEB</span><span class="t t-mix">B · PANTALLA + CARA</span></header><dl>
+    <dt>0–3 s</dt><dd>"Busqué 'dentista cerca de mí' en [tu ciudad] y solo <b>[X]</b> de los primeros <b>[X]</b> tienen página web."</dd>
+    <dt>3–15 s</dt><dd>[Grabación de pantalla, nombres difuminados.] "El primero: muchas reseñas, fotos, horario y enlace a su web. El segundo: sin fotos, y el enlace lleva a un Instagram con la última publicación de hace un año."</dd>
+    <dt>15–25 s</dt><dd>[Abres la web del primero: precios, botón de WhatsApp.] "Aquí ya sé cuánto cuesta y le escribo en un toque. En el otro… no sé ni si sigue abierto."</dd>
+    <dt>25–32 s</dt><dd>"Si te duele una muela, ¿a cuál llamas? Exacto. Tu cliente hace lo mismo con tu negocio, todos los días."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">WEB</span> y te mando la guía para que tu negocio salga como el primero."</dd>
+    <dt>Grabación</dt><dd>Haz la búsqueda de verdad y anota los números reales. Difumina nombres y caras. Puedes repetir la idea con otros rubros: abogado, contador, pastelería.</dd>
+  </dl></article>
+
+  <article class="script"><header><span class="n">8B</span><h3>"Haz esta prueba con tu negocio ahora mismo"</h3><span class="t t-web">WEB</span><span class="t t-mix">E · PANTALLA VERDE</span></header><dl>
+    <dt>0–3 s</dt><dd>[Tú delante de la pantalla de Google.] "Haz esta prueba ahora: busca en Google lo que vendes, más 'cerca de mí'."</dd>
+    <dt>3–14 s</dt><dd>[Fondo: resultados de la búsqueda.] "¿Apareces? Si no, esos clientes se los está llevando el primero de la lista. Y mira lo que tiene él que tú no: fotos, reseñas y una web."</dd>
+    <dt>14–25 s</dt><dd>[Fondo: una ficha de Google y una web sencilla.] "No necesitas una web enorme. Con una página que diga qué haces, cuánto cuesta, dónde estás y un botón de WhatsApp, ya estás en la lista."</dd>
+    <dt>25–30 s</dt><dd>"Dime en los comentarios: ¿apareciste o no?"</dd>
+    <dt>CTA</dt><dd>"Y si no apareciste, comenta <span class="kw">WEB</span> y te mando la guía."</dd>
+    <dt>Grabación</dt><dd>Capturas de la búsqueda real con nombres difuminados. Pedir que respondan en comentarios da interacción extra.</dd>
+  </dl></article>
+
+  <h3 class="week" id="g9">Idea 9 · Dos emprendedoras, mismo producto <span>lógica: historia de dos personajes · termina en COMBO</span></h3>
+
+  <article class="script"><header><span class="n">9A</span><h3>María y Carla venden tortas</h3><span class="t t-mix">COMBO</span><span class="t t-mix">G · PERSONAJES</span></header><dl>
+    <dt>0–3 s</dt><dd>[Texto: <b>Mismo producto. Una vende, la otra no.</b>] [Tú como María, con delantal:] "Mis tortas son las más ricas de la zona… y esta semana no vendí ni una."</dd>
+    <dt>3–12 s</dt><dd>[María.] Sube una foto con flash y escribe "precio al privado". [Llega un mensaje; María lo ve a las 10 de la noche.] "Ay, ya se fue."</dd>
+    <dt>12–22 s</dt><dd>[Tú como Carla, con otra ropa.] Sube 10 segundos cortando la torta, con música. Su enlace lleva a un menú con precios. [Suena WhatsApp:] "Hola, quiero la de chocolate para el sábado."</dd>
+    <dt>22–30 s</dt><dd>[María mirando el teléfono de Carla.] "Pero mi torta es más rica…" [Carla:] "Sí. Pero la mía se ve, y se pide en un minuto."</dd>
+    <dt>CTA</dt><dd>[Tú, sin personaje.] "Si eres María, comenta <span class="kw">COMBO</span> y te explico cómo armo los videos y la web para que te pidan como a Carla."</dd>
+    <dt>Grabación</dt><dd>Personajes inventados. Dos ropas y dos lugares de la casa. Para la parte de Carla, usa un clip de torta bien editado: es tu portafolio.</dd>
+  </dl></article>
+
+  <article class="script"><header><span class="n">9B</span><h3>"Te cuento la historia de dos emprendedoras"</h3><span class="t t-mix">COMBO</span><span class="t t-mix">A · A CÁMARA</span></header><dl>
+    <dt>0–3 s</dt><dd>"Dos emprendedoras venden la misma torta, al mismo precio. Una vende 30 al mes y la otra 3. Te cuento la diferencia."</dd>
+    <dt>3–14 s</dt><dd>"La primera sube fotos cuando se acuerda y contesta los mensajes en la noche. Cuando responde, el cliente ya le compró a otra."<br>[Imágenes: foto oscura, chat sin respuesta.]</dd>
+    <dt>14–26 s</dt><dd>"La segunda sube un video corto casi todos los días. Quien lo ve encuentra el precio en su página y le escribe con un toque. No tiene que convencer a nadie: llegan decididos."<br>[Imágenes: video de torta, web, WhatsApp.]</dd>
+    <dt>26–32 s</dt><dd>"La torta más rica era la de la primera. No gana el mejor producto; gana el que se ve y se pide más fácil."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">COMBO</span> y te cuento cómo lo hago para tu negocio."</dd>
+    <dt>Grabación</dt><dd>Aclara en el texto del post que es un ejemplo, no un caso real. Los números "30 y 3" son parte de la historia: no los presentes como dato.</dd>
+  </dl></article>
+
+  <h3 class="week" id="g10">Idea 10 · Lo que ve un cliente en los primeros 3 segundos <span>lógica: punto de vista del cliente · termina en REEL</span></h3>
+
+  <article class="script"><header><span class="n">10A</span><h3>"Eres un cliente. Tienes 3 segundos."</h3><span class="t t-vid">VIDEO</span><span class="t t-mix">J · SUBJETIVO</span></header><dl>
+    <dt>0–3 s</dt><dd>[Cámara como tus ojos, mirando el teléfono.] "Eres un cliente y tienes 3 segundos. Vamos."</dd>
+    <dt>3–10 s</dt><dd>[Aparece un Reel que empieza "Hola, bienvenidos a mi emprendimiento…". El dedo lo pasa.] [Texto: <b>Cliente perdido #1</b>]</dd>
+    <dt>10–17 s</dt><dd>[Entras al perfil. La bio dice "Emprendedora 🌸 Soñadora". No dice qué vende ni dónde.] "¿Qué vende? Ni idea." [Sales.] [Texto: <b>Cliente perdido #2</b>]</dd>
+    <dt>17–23 s</dt><dd>[Tocas el enlace de la bio: página de error.] [Texto: <b>Cliente perdido #3</b>]</dd>
+    <dt>23–32 s</dt><dd>[Tú a cámara.] "Tres clientes perdidos en 9 segundos, y el negocio ni se enteró. Un gancho, una bio clara y un enlace que funcione. Nada más."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">REEL</span> y reviso gratis tus últimos 3 Reels y tu perfil."</dd>
+    <dt>Grabación</dt><dd>Crea un perfil de ejemplo inventado para las tomas. Graba con el teléfono en la mano y el pulgar visible.</dd>
+  </dl></article>
+
+  <article class="script"><header><span class="n">10B</span><h3>Los 3 errores, arreglados en 30 segundos</h3><span class="t t-vid">VIDEO</span><span class="t t-mix">C · ANTES/DESPUÉS</span></header><dl>
+    <dt>0–3 s</dt><dd>[Pantalla dividida: perfil malo / perfil arreglado.] "Si tu perfil se ve como el de la izquierda, estás perdiendo clientes sin darte cuenta."</dd>
+    <dt>3–12 s</dt><dd>[Error 1.] Antes: Reel que empieza "Hola, bienvenidos". Después: Reel que empieza "Esta torta se agota todos los viernes." [Texto: <b>El gancho</b>]</dd>
+    <dt>12–20 s</dt><dd>[Error 2.] Antes: bio "Emprendedora 🌸". Después: "Tortas por encargo en [ciudad] · Pide por WhatsApp 👇". [Texto: <b>La bio</b>]</dd>
+    <dt>20–27 s</dt><dd>[Error 3.] Antes: enlace roto. Después: web con precios y botón de WhatsApp. [Texto: <b>El enlace</b>]</dd>
+    <dt>27–32 s</dt><dd>"Mismo negocio, mismo producto. Solo cambiaron los primeros 3 segundos."</dd>
+    <dt>CTA</dt><dd>"Comenta <span class="kw">REEL</span> y te digo cuál de los tres te está fallando a ti."</dd>
+    <dt>Grabación</dt><dd>Usa el mismo perfil inventado de la 10A. Transición deslizante entre el antes y el después de cada error.</dd>
+  </dl></article>
+
+  </div>
+
+  <div class="grid2">
+    <div class="box"><span class="label">texto de cada publicación</span>
+      <div class="phone">[Repite el gancho en una línea]
+
+[Una frase con la moraleja del video]
+
+👇 Comenta [PALABRA] y te mando [el regalo].
+
+#anainnova #negociosvenezuela #emprendedores #paginasweb #marketingdigital</div>
+    </div>
+    <div class="box"><span class="label">orden de publicación sugerido</span>
+      <p><b>Semana 1:</b> 1A · 2A · 3A · 5A · 10A</p>
+      <p><b>Semana 2:</b> 4A · 6A · 9A · 8A · 7B</p>
+      <p><b>Semana 3:</b> 1B · 2B · 3B · 5B · 10B</p>
+      <p><b>Semana 4:</b> 4B · 6B · 9B · 8B · 7A</p>
+      <p class="note">El 7A va al final porque necesita un Reel tuyo con muchas vistas para compararlo. Si una versión A funciona, adelanta su versión B a la semana siguiente.</p>
+    </div>
+  </div>
+</section>
+
+<section id="fotocopiadora">
+  <span class="eyebrow">// 11 bloque 3 · la fotocopiadora</span>
+  <h2>Cuando algo funciona, se repite</h2>
+  <p>Un Reel que funciona no te da visitas: te da <b>información</b> sobre el tema, el ángulo, el gancho y el formato que le gustan a tu público.</p>
+  <div class="grid2">
+    <div class="box"><span class="label">qué cuenta como "funcionó"</span><ul class="clean">
+      <li>3 veces o más tus vistas promedio, <b>o</b></li>
+      <li>el doble de comentarios con palabra clave que tu promedio, <b>o</b></li>
+      <li>muchos guardados o envíos (más valiosos que los "me gusta").</li>
+    </ul><p class="note">De 20 pruebas, espera entre 2 y 4 ganadores.</p></div>
+    <div class="box"><span class="label">qué haces con cada ganador</span><ul class="clean">
+      <li>Lo grabas en <b>3 formatos nuevos</b>, con el mismo gancho y casi el mismo guion.</li>
+      <li>El <b>siguiente</b> Reel que publicas es del mismo tema.</li>
+      <li><b>Nunca</b> dejas de publicar "para no cortar la racha".</li>
+      <li>4 ganadores × 3 formatos = 12 Reels del mes siguiente ya resueltos. Los otros 8 son pruebas nuevas.</li>
+    </ul></div>
+  </div>
+  <div class="phone">Ejemplo: gana la idea 1 ("web vs solo Instagram", formato F).
+→ Versión G: dos dueños de negocio discutiendo, uno con web y otro sin web.
+→ Versión E: pantalla verde con capturas de Google de un negocio con web y otro sin web.
+→ Versión H: la misma lista de diferencias, cambiando de lugar en cada frase.</div>
+</section>
+
+<section id="historias">
+  <span class="eyebrow">// 12 convertir atención en dinero</span>
+  <h2>Historias de venta, palabra clave y UTM</h2>
+  <p>Los Reels de nivel 0–1 traen gente. La venta pasa en las historias y en el chat.</p>
+  <div class="grid2">
+    <div class="box"><span class="label">secuencia de 5–8 historias, siempre a la misma hora</span>
+      <ol class="clean" style="padding-left:1.3em">
+        <li><b>Algo muy visual:</b> un antes/después, una web abriendo en el teléfono. Las vistas de las demás dependen de esta.</li>
+        <li>El contexto: "esto le pasaba a este negocio".</li>
+        <li>Lo que hiciste (pantalla o timelapse).</li>
+        <li>El resultado o la reacción del cliente.</li>
+        <li>Encuesta o pregunta: "¿tu negocio tiene web?"</li>
+        <li>"Escríbeme <b>YO</b> y te digo qué haría con el tuyo."</li>
+      </ol>
+      <p class="note">Hora: empieza con las 12:00 o las 19:00 (hora de Venezuela) y cambia según el horario de tus seguidores en las estadísticas de Instagram.</p>
+    </div>
+    <div class="box"><span class="label">el camino del cliente</span><ul class="clean">
+      <li><b>Instagram:</b> "Comenta [PALABRA]" → ManyChat responde y hace 2 preguntas.</li>
+      <li><b>TikTok:</b> no hay ManyChat: la llamada a la acción es "el enlace está en mi perfil".</li>
+      <li><b>Registro:</b> cada contacto va a una hoja (o CRM) con servicio, tipo de negocio y de qué video llegó.</li>
+      <li><b>UTM por Reel:</b> <code>anainnova.com/diagnostico?utm_source=ig&amp;utm_campaign=reel-07</code>. Así sabes qué video trae ventas, no solo vistas.</li>
+      <li><b>Retargeting</b> (desde el día 60): público de quien vio el 50% de tus Reels → anuncio con tu testimonio o tus cupos reales.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="medir">
+  <span class="eyebrow">// 13 metas</span>
+  <h2>Qué mides cada domingo</h2>
+  <p>El video promete 100.000 seguidores. Para ti, 1.500 seguidores que sean dueños de negocio valen más que 100.000 curiosos. Estas metas reemplazan a las de la estrategia v2 y son orientativas.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Indicador</th><th>Días 1–37</th><th>Días 38–67</th><th>Días 68–97</th></tr></thead>
+    <tbody>
+      <tr><td>Reels publicados</td><td class="num">20</td><td class="num">20 (12 copias + 8 nuevas)</td><td class="num">20</td></tr>
+      <tr><td>Ganadores (3× el promedio)</td><td class="num">2–4</td><td class="num">4–6</td><td class="num">6+</td></tr>
+      <tr><td>Vistas de Reels ÷ seguidores</td><td class="num">≥ 40%</td><td class="num">≥ 40%</td><td class="num">≥ 40%</td></tr>
+      <tr><td>Vistas de historias ÷ seguidores</td><td class="num">≥ 10%</td><td class="num">≥ 8%</td><td class="num">≥ 5%</td></tr>
+      <tr><td>Seguidores</td><td class="num">500</td><td class="num">1.500</td><td class="num">4.000</td></tr>
+      <tr><td>Comentarios con palabra clave</td><td class="num">60</td><td class="num">180</td><td class="num">400</td></tr>
+      <tr><td>Llamadas de diagnóstico</td><td class="num">4</td><td class="num">10</td><td class="num">18</td></tr>
+      <tr><td>Clientes nuevos (web o pack)</td><td class="num">1–2</td><td class="num">3</td><td class="num">5</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="ruta">
+  <span class="eyebrow">// 14 calendario</span>
+  <h2>Una semana de arranque + tres bloques de 30 días</h2>
+  <div class="phase">
+    <div class="box"><span class="label">días 1–7</span><h3>Quitar el freno</h3><ul class="clean">
+      <li>Archivar lo que no sea Reel</li><li>Bio y destacadas</li><li>Migración: 300 seguidores reales</li><li>ManyChat con WEB, VIDEO y REVISA</li><li>Hoja con las 10 referencias</li><li>Anuncio de mensajes separado</li>
+    </ul></div>
+    <div class="box"><span class="label">días 8–37</span><h3>Pruebas</h3><ul class="clean">
+      <li>5 Reels por semana (lun a vie)</li><li>Las 10 ideas × 2 formatos</li><li>Cada 4 pruebas, 1 guion de venta de tu banco</li><li>Historias diarias; secuencia de venta 2 veces por semana</li>
+    </ul></div>
+    <div class="box"><span class="label">días 38–67</span><h3>Fotocopiadora</h3><ul class="clean">
+      <li>Ganadores × 3 formatos</li><li>8 ideas nuevas con referencias nuevas</li><li>Serie "negocio real en 7 días"</li><li>UTM en cada Reel</li>
+    </ul></div>
+    <div class="box"><span class="label">días 68–97</span><h3>Cosechar</h3><ul class="clean">
+      <li>Secuencia de venta en historias 3 veces por semana</li><li>Retargeting a quien vio tus Reels</li><li>Los ganadores también en TikTok y Shorts</li><li>Casos de clientes convertidos en Reels</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="hoy">
+  <span class="eyebrow">// empieza hoy</span>
+  <h2>Las 6 tareas de esta semana</h2>
+  <ul class="clean" style="font-size:1.05rem">
+    <li>Archivar las publicaciones que no sean Reels de tu tema.</li>
+    <li>Enviar el mensaje de migración a 30 personas por día, una por una.</li>
+    <li>Revisar la campaña de $7/día: objetivo mensajes, como anuncio aparte y sin promocionar posts.</li>
+    <li>Buscar las 10 referencias (5 en español y 5 en inglés) y anotar la lógica de cada una.</li>
+    <li>Escribir 5 ganchos para las ideas 1, 2 y 3 y elegir el mejor de cada una.</li>
+    <li>Grabar las 6 primeras pruebas (ideas 1–3 × 2 formatos) en una sola tarde.</li>
+  </ul>
+  <p class="note">Análisis del video de Víctor Heras sobre el sistema 3×30, hecho el 18 de septiembre de 2026. Las cifras de sus casos las da él y no se pueden comprobar.</p>
+</section>
+</div>
+<button class="totop" type="button" hidden>&uarr; Arriba</button>
+<script>
+(() => {
+  const bar = document.querySelector('.topnav');
+  const strip = bar.querySelector('.topnav-sections');
+  const links = [...strip.querySelectorAll('a')];
+  const targets = links.map(a => document.getElementById(a.hash.slice(1)));
+  const toTop = document.querySelector('.totop');
+  let current = -1;
+  function update() {
+    const line = bar.offsetHeight + 40;
+    let idx = 0;
+    targets.forEach((el, i) => { if (el && el.getBoundingClientRect().top <= line) idx = i; });
+    if (idx !== current) {
+      links.forEach((a, i) => i === idx ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current'));
+      const a = links[idx];
+      const sr = strip.getBoundingClientRect(), ar = a.getBoundingClientRect(); strip.scrollTo({ left: Math.max(0, strip.scrollLeft + (ar.left - sr.left) - (strip.clientWidth - ar.width) / 2), behavior: 'smooth' });
+      current = idx;
+    }
+    toTop.hidden = window.scrollY < 700;
+  }
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+  toTop.addEventListener('click', () => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    bar.querySelector('.topnav-brand').focus({ preventScroll: true });
+  });
+})();
+</script></body>
+</html>
